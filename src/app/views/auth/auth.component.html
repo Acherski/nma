@@ -1,0 +1,71 @@
+<form
+  [formGroup]="formGroup"
+  class="w-[100vw] bg-center h-[100vh] bg-[url('/assets/images/bg-auth.jpg')] bg-no-repeat nma-auth-component bg-cover overflow-hidden flex flex-col gap-4 items-center justify-center">
+  <div class="text-center">
+    <h3>Numerius</h3>
+    <h1>{{ 'AUTH.MANAGEMENT_APP' | translate }}</h1>
+  </div>
+
+  <nma-text-control label="AUTH.LOGIN" [control]="formGroup.controls.login" />
+
+  <nma-text-control
+    *ngIf="(componentStore.authMode$ | ngrxPush) === 'REGISTER'"
+    label="AUTH.EMAIL"
+    [control]="formGroup.controls.email" />
+
+  <ng-container *ngIf="(componentStore.authMode$ | ngrxPush) === 'PASSWORD_CHANGE'">
+    <nma-password-control label="AUTH.NEW_PASSWORD" [control]="formGroup.controls.newPassword" />
+    <nma-password-control label="AUTH.NEW_PASSWORD_REENTERED" [control]="formGroup.controls.newPasswordReentered" />
+  </ng-container>
+
+  <nma-password-control
+    *ngIf="(componentStore.authMode$ | ngrxPush) !== 'PASSWORD_CHANGE'"
+    label="AUTH.PASSWORD"
+    [control]="formGroup.controls.password" />
+
+  <div *ngrxLet="componentStore.authMode$ as mode" class="flex flex-col gap-4">
+    <button
+      *ngIf="mode === 'LOGIN'"
+      [disabled]="!formValid || (componentStore.callState$ | ngrxPush) === LoadingState.LOADING"
+      (click)="
+        componentStore.login({
+          login: formGroup.controls.login.value,
+          password: formGroup.controls.password.value
+        })
+      "
+      mat-raised-button
+      color="primary">
+      {{ 'AUTH.LOG_IN' | translate }}
+    </button>
+    <button
+      *ngIf="mode === 'REGISTER'"
+      [disabled]="!formValid || (componentStore.callState$ | ngrxPush) === LoadingState.LOADING"
+      (click)="
+        componentStore.register({
+          login: formGroup.controls.login.value,
+          password: formGroup.controls.password.value,
+          email: formGroup.controls.email.value
+        })
+      "
+      mat-raised-button
+      color="primary">
+      {{ 'AUTH.REGISTER' | translate }}
+    </button>
+    <button
+      *ngIf="mode === 'PASSWORD_CHANGE'"
+      [disabled]="!formValid || (componentStore.callState$ | ngrxPush) === LoadingState.LOADING"
+      (click)="
+        componentStore.changeYourOwnPassword({
+          newPassword: formGroup.controls.newPassword.value
+        })
+      "
+      mat-raised-button
+      color="primary">
+      {{ 'AUTH.UPDATE_PASSWORD' | translate }}
+    </button>
+
+    <button (click)="componentStore.switchMode()">
+      {{ mode === 'LOGIN' ? ('AUTH.REGISTER_MODE' | translate) : ('AUTH.LOGIN_MODE' | translate) }}
+    </button>
+  </div>
+</form>

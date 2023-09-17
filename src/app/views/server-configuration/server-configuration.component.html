@@ -1,0 +1,29 @@
+<nma-header label="SERVER_CONFIGURATION.TITLE"></nma-header>
+
+<div class="px-8 py-6">
+  <nma-table
+    [config]="tableConfig"
+    (onEdit)="openEditDialog($event)"
+    [callState]="componentStore.callState$"
+    [data]="componentStore.settingList$"></nma-table>
+</div>
+
+<!-- <table>
+  <tr>
+    <th>{{ 'TABLE.NO' | translate }}</th>
+    <th>{{ 'USERS.USER_NAME' | translate }}</th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let user of []; let index = index" class="hover:bg-slate-100">
+    <th>{{ index + 1 }}.</th>
+    <th>{{ user }}</th>
+    <th>
+        <button  (click)="openEditDialog()" mat-button color="warn">
+            {{ 'BUTTON.EDIT' | translate }}
+          </button>
+      <button  (click)="openRemoveDialog()" mat-button color="warn">
+        {{ 'BUTTON.DELETE' | translate }}
+      </button>
+    </th>
+  </tr>
+</table> -->

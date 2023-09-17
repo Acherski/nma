@@ -1,0 +1,7 @@
+<mat-form-field appearance="fill" class="w-[300px]">
+  <mat-label>{{ label | translate }}</mat-label>
+  <input [formControl]="control" matInput />
+  <mat-hint *ngIf="!control.value && control.touched" class="text-red-600 drop-shadow-md">
+    {{ 'FORM.NO_VALUE' | translate }}
+  </mat-hint>
+</mat-form-field>

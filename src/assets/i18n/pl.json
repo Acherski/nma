@@ -1,0 +1,84 @@
+{
+  "AUTH": {
+    "MANAGEMENT_APP": "System zarządzania",
+    "LOGIN": "Login",
+    "EMAIL": "Email",
+    "PASSWORD": "Hasło",
+    "ENTER_LOGIN": "Podaj login",
+    "ENTER_PASSWORD": "Podaj hasło",
+    "ENTER_EMAIL": "Podaj adres mailowy",
+    "LOG_IN": "Zaloguj się",
+    "LOG_OUT": "Wyloguj",
+    "REGISTER": "Zarejestruj się",
+    "REGISTER_MODE": "Panel rejestracji",
+    "LOGIN_MODE": "Panel logowania",
+    "LOGIN_SUCCESS": "Zalogowano pomyślnie",
+    "REGISTER_SUCCESS": "Zarejestrowano pomyślnie. Możesz się teraz zalogować",
+    "LOGIN_FAILED": "Błąd logowania",
+    "REGISTER_FAILED": "Błąd rejestracji",
+    "CONNECTION_FAILED": "Brak połączenia z serwerem",
+    "LOGOUT_SUCCESS": "Wylogowano pomyślnie",
+    "GUARD_ERROR": "Dostęp tylko dla zalogowanych użytkowników",
+    "OLD_PASSWORD": "Stare hasło",
+    "NEW_PASSWORD": "Nowe hasło",
+    "NEW_PASSWORD_REENTERED": "Powtórz nowe hasło",
+    "UPDATE_PASSWORD": "Zaktualizuj hasło",
+    "CHANGE_PASSWORD_SUCCESS": "Hasło zmienione pomyślnie. Możesz się teraz zalogować",
+    "CHANGE_PASSWORD_ERROR": "Błąd w czasie zmiany hasła",
+    "PASSWORD_CHANGE_NEEDED": "Wymagana aktualizacja hasła",
+    "PASSWORDS_DONT_MATCH": "Wprowadzone hasła różnią się od siebie",
+    "DISCONNECTED": "Połączenie z serwerem zostało zerwane"
+  },
+  "USERS": {
+    "USERS_LIST": "Lista użytkowników",
+    "USER_NAME": "Nazwa użytkownika",
+    "LOAD_LIST_ERROR": "Błąd pobierania listy użytkowników",
+    "REMOVE_SUCCESS": "Użytkownik usunięty pomyślnie",
+    "REMOVE_FAIL": "Błąd usuwania użytkownika",
+    "REMOVE_USER_DIALOG_MESSAGE": "Czy na pewno chcesz usunąć użytkownika ",
+    "PASSWORD_CHANGE": "Zmiana hasła użytkownika",
+    "ENTER_OLD_PASSWORD": "Podaj stare hasło",
+    "ENTER_NEW_PASSWORD": "Podaj nowe hasło",
+    "ENFORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła po zalogowaniu",
+    "CHANGE_PASSWORD_SUCCESS": "Pomyślnie zmieniono hasło użytkownika",
+    "CHANGE_PASSWORD_ERROR": "Zmiana hasła zakończona niepowodzeniem",
+    "NO_ATTRIBUTES_FOUND": "Nie znaleziono atrybutów przypisanych do użytkownika"
+  },
+  "SERVER_CONFIGURATION": {
+    "TITLE": "Panel ustawień serwera",
+    "LOAD_ERROR": "Błąd pobierania listy ustawień serwera",
+    "SETTING_EDIT_SUCCESS": "Zmiany zostały zapisane",
+    "SETTING_EDIT_FAIL": "Błąd edycji ustawień serwera",
+    "COLUMN": {
+      "KEY": "Nazwa klucza",
+      "VALUE": "Wartość"
+    }
+  },
+  "TABLE": {
+    "NO": "L.p.",
+    "LOAD_DATA_ERROR": "Błąd pobierania danych tabeli",
+    "PAGINATOR": {
+      "FIRST_PAGE": "Pierwsza strona",
+      "LAST_PAGE": "Ostatnia strona",
+      "NEXT_PAGE": "Następna strona",
+      "PREVIOUS_PAGE": "Poprzednia strona",
+      "ITEMS_PER_PAGE": "Ilość wyników na stronie:",
+      "RANGE": "z"
+    }
+  },
+  "BUTTON": {
+    "DELETE": "Usuń",
+    "CANCEL": "Anuluj",
+    "CLOSE": "Zamknij",
+    "EDIT": "Edytuj",
+    "CONFIRM": "Zatwierdź",
+    "CHANGE_PASSWORD": "Zmień hasło"
+  },
+  "SIDE_NAV": {
+    "USERS": "Użytkownicy",
+    "SERVER_SETTINGS": "Ustawienia serwera"
+  },
+  "FORM": {
+    "NO_VALUE": "Pole nie może być puste"
+  }
+}

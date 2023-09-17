@@ -1,0 +1,84 @@
+{
+  "AUTH": {
+    "MANAGEMENT_APP": "Management system",
+    "LOGIN": "Login",
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "ENTER_LOGIN": "Enter your login",
+    "ENTER_PASSWORD": "Enter your password",
+    "ENTER_EMAIL": "Enter your email",
+    "LOG_IN": "Log in",
+    "LOG_OUT": "Log out",
+    "REGISTER": "Sign in",
+    "REGISTER_MODE": "Registration panel",
+    "LOGIN_MODE": "Login panel",
+    "LOGIN_SUCCESS": "Logged in successfully",
+    "REGISTER_SUCCESS": "Registered successfully. You can log to the appliacation now",
+    "LOGIN_FAILED": "Login failed",
+    "REGISTER_FAILED": "Registration failed",
+    "CONNECTION_FAILED": "No connection to the server",
+    "LOGOUT_SUCCESS": "Logged out successfully",
+    "GUARD_ERROR": "You have to log in to view this page",
+    "NEW_PASSWORD": "New password",
+    "OLD_PASSWORD": "Old password",
+    "NEW_PASSWORD_REENTERED": "Repeat new password",
+    "UPDATE_PASSWORD": "Update password",
+    "CHANGE_PASSWORD_SUCCESS": "Password changed successfully. You can now log in",
+    "CHANGE_PASSWORD_ERROR": "Password change failed",
+    "PASSWORD_CHANGE_NEEDED": "Password needs to be updated",
+    "PASSWORDS_DONT_MATCH": "Password do not match",
+    "DISCONNECTED": "You have been disconnected from the server"
+  },
+  "USERS": {
+    "USERS_LIST": "List of users",
+    "USER_NAME": "User name",
+    "LOAD_LIST_ERROR": "Error occured while loading list of users",
+    "REMOVE_SUCCESS": "User has been removed successfully",
+    "REMOVE_FAIL": "Error occured while deleting user",
+    "REMOVE_USER_DIALOG_MESSAGE": "Are you sure you want to delete user ",
+    "PASSWORD_CHANGE": "Password change",
+    "ENTER_OLD_PASSWORD": "Enter old password",
+    "ENTER_NEW_PASSWORD": "Enter new password",
+    "ENFORCE_PASSWORD_CHANGE": "Enforce password change",
+    "CHANGE_PASSWORD_SUCCESS": "User password changed successfully",
+    "CHANGE_PASSWORD_ERROR": "User password change failed",
+    "NO_ATTRIBUTES_FOUND": "No attributes found"
+  },
+  "SERVER_CONFIGURATION": {
+    "TITLE": "Server configuration panel",
+    "LOAD_ERROR": "Error occured while loading list of server settings",
+    "SETTING_EDIT_SUCCESS": "Changes have been saved successfully",
+    "SETTING_EDIT_FAIL": "Error occured while saving setting",
+    "COLUMN": {
+      "KEY": "Key name",
+      "VALUE": "Value"
+    }
+  },
+  "TABLE": {
+    "NO": "No.",
+    "LOAD_DATA_ERROR": "Error while loading table data",
+    "PAGINATOR": {
+      "FIRST_PAGE": "First page",
+      "LAST_PAGE": "Last page",
+      "NEXT_PAGE": "Next page",
+      "PREVIOUS_PAGE": "Previous page",
+      "ITEMS_PER_PAGE": "Items per page:",
+      "RANGE": "of"
+    }
+  },
+  "BUTTON": {
+    "DELETE": "Delete",
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
+    "EDIT": "Edit",
+    "CONFIRM": "Confirm",
+    "CHANGE_PASSWORD": "Change password"
+  },
+  "SIDE_NAV": {
+    "USERS": "Users",
+    "SERVER_SETTINGS": "Server settings"
+  },
+  "FORM": {
+    "NO_VALUE": "Field cannot be empty"
+  }
+}

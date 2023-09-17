@@ -1,0 +1,28 @@
+<div class="bg-white rounded-md flex flex-col">
+  <div *ngIf="title" class="flex items-center justify-between pt-6 pb-4 px-6 border-b-2 border-slate-100">
+    <p class="!m-0 text-lg">{{ title | translate }}</p>
+    <button (click)="onDismiss()"><mat-icon>close</mat-icon></button>
+  </div>
+  <div class="p-6 relative">
+    <ng-content select="[content]"></ng-content>
+  </div>
+  <div class="flex gap-4 justify-end p-6 border-t-2 border-slate-100">
+    <ng-container *ngIf="!customActionButtons">
+      <button mat-raised-button (click)="onDismiss()">
+        {{ customCancelBtnName ? (customCancelBtnName | translate) : ('BUTTON.CANCEL' | translate) }}
+      </button>
+      <button mat-raised-button color="primary" (click)="onConfirm()" [disabled]="confirmBtnDisabled">
+        <div *ngIf="!confirmBtnLoading; else spinner" class="h-full w-full">
+          {{ customConfirmBtnName ? (customConfirmBtnName | translate) : ('BUTTON.CONFIRM' | translate) }}
+        </div>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="customActionButtons">
+      <ng-content select="[buttons]"></ng-content>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #spinner>
+  <nma-spinner class="block h-full scale-[0.2]" />
+</ng-template>
