@@ -17,12 +17,14 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { filter, tap } from 'rxjs';
+import { filter, take, tap } from 'rxjs';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { LoadingState } from 'src/app/constants/callstate.constant';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { PaginatorService } from 'src/app/services/page-config.service';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { User } from './models/user.interface';
 
 @Component({
   selector: 'nma-user-list',
@@ -45,6 +47,7 @@ import { PaginatorService } from 'src/app/services/page-config.service';
     MatTooltipModule,
     CdkAccordionModule,
     MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [provideComponentStore(UserListComponentStore)],
   animations: [
@@ -56,16 +59,16 @@ import { PaginatorService } from 'src/app/services/page-config.service';
   ],
 })
 export class UserListComponent implements OnInit {
+  @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  displayedColumns: string[] = ['no', 'userName', 'actions'];
-  expandedElement: string | null = null;
-  listOfUsers: string[] = [];
-  dataSource!: MatTableDataSource<string>;
+  protected displayedColumns: string[] = ['no', 'userName', 'actions'];
+  protected expandedElement: User | null = null;
+  protected listOfUsers: User[] = [];
+  protected dataSource!: MatTableDataSource<User>;
+  private destroyRef = inject(DestroyRef);
 
   readonly LoadingState = LoadingState;
-
-  private destroyRef = inject(DestroyRef);
 
   constructor(
     protected componentStore: UserListComponentStore,
@@ -78,34 +81,39 @@ export class UserListComponent implements OnInit {
       .pipe(
         tap(list => {
           this.listOfUsers = [];
-          list.map(user => this.listOfUsers.push(user));
+          list.map(user => this.listOfUsers.push({ userName: user }));
           this.dataSource = new MatTableDataSource(this.listOfUsers);
-          if (this.paginator) this.dataSource.paginator = this.paginatorService.translatePaginator(this.paginator);
+          if (this.paginator && this.sort) {
+            this.dataSource.paginator = this.paginatorService.translatePaginator(this.paginator);
+            this.dataSource.sort = this.sort;
+          }
         }),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
   }
 
-  protected onUserDelete(userName: string, event: Event) {
+  protected onUserDelete(user: User, event: Event) {
     event.stopPropagation();
-    const dialogRef = this.dialog.open<string>(DeleteUserDialogComponent, {
+
+    const dialogRef = this.dialog.open<User>(DeleteUserDialogComponent, {
       width: '350px',
-      data: { userName },
+      data: { userName: user.userName },
     });
 
     dialogRef.closed.subscribe(result => {
       if (result) {
-        this.componentStore.removeUser({ userName });
+        this.componentStore.removeUser({ userName: user.userName });
       }
     });
   }
 
-  protected onPasswordChange(userName: string, event: Event) {
+  protected onPasswordChange(user: User, event: Event) {
     event.stopPropagation();
+
     const dialogRef = this.dialog.open<ChangePasswordDialogData>(ChangePasswordDialogComponent, {
       width: '350px',
-      data: { userName },
+      data: { userName: user.userName },
     });
 
     dialogRef.closed.subscribe(result => {
@@ -118,20 +126,26 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  loadUserAttributes(row: string) {
+  protected loadUserAttributes(row: User) {
     if (row === this.expandedElement) {
       this.expandedElement = null;
       return;
     }
 
-    this.componentStore.loadUserAttributes(row);
+    this.componentStore.loadUserAttributes(row.userName);
     this.componentStore.detailsCallState$
       .pipe(
         filter(callState => callState === LoadingState.LOADED),
+        take(1),
         tap(() => {
           this.expandedElement = row;
         })
       )
       .subscribe();
+  }
+
+  protected onSort() {
+    this.expandedElement = null;
+    this.componentStore.loadUsers();
   }
 }
