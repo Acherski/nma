@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainViewComponent } from './feature/main/main.component';
-import { AuthComponent } from './feature/auth/auth.component';
-import { AuthGuardService } from './feature/auth/auth.guard';
 import { ServerConfigurationComponent } from './feature/server-configuration/server-configuration.component';
 import { UserListComponent } from './feature/user-list/user-list.component';
+import { AuthComponent } from './auth/auth.component';
+import { AuthGuardService } from './auth/auth.guard';
 
 const routes: Routes = [
   {

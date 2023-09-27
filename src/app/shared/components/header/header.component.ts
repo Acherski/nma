@@ -5,7 +5,7 @@ import { LetDirective } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
 import { Dialog } from '@angular/cdk/dialog';
 import { ChangeOwnPasswordDialogComponent } from './change-own-password-dialog/change-own-password-dialog.component';
-import { authChangePassword, authLogout } from 'src/app/feature/auth/store/auth.actions';
+import { authChangePassword, authLogout } from 'src/app/auth/store/auth.actions';
 import { Store } from '@ngrx/store';
 import { MatMenuModule } from '@angular/material/menu';
 import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';

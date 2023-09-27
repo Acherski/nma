@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoadingState } from 'src/app/shared/constants/callstate.constant';
 import { PasswordControlComponent } from 'src/app/design-system/controls/password-control/password-control.component';
 import { DialogContainerComponent } from 'src/app/design-system/dialog-container/dialog-container.component';
-import { selectAuthCallState } from 'src/app/feature/auth/store/auth.selectors';
+import { selectAuthCallState } from 'src/app/auth/store/auth.selectors';
 import { requiredNonNullable } from 'src/app/shared/constants/required-nonnullable.constant';
 
 @Component({

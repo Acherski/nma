@@ -4,8 +4,6 @@ import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
-import { AuthForm } from '../../feature/auth/models/auth-form-group.interface';
-import { createAuthFormGroupUtil } from '../../feature/auth/utils/create-auth-formgroup';
 import { EncodePipe } from 'src/app/shared/utils/pipes/encode.pipe';
 import { distinctUntilChanged, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,12 +11,14 @@ import { TextControlComponent } from 'src/app/design-system/controls/text-contro
 import { PasswordControlComponent } from 'src/app/design-system/controls/password-control/password-control.component';
 import { LoadingState } from 'src/app/shared/constants/callstate.constant';
 import { Store } from '@ngrx/store';
-import { selectAuthCallState, selectAuthMode } from '../../feature/auth/store/auth.selectors';
-import { AuthModeEnum } from '../../feature/auth/enums/auth-mode.enum';
-import { authChangePassword, authLogin, authRegister, authSwitchMode } from '../../feature/auth/store/auth.actions';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { Router } from '@angular/router';
 import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';
+import { AuthModeEnum } from './enums/auth-mode.enum';
+import { AuthForm } from './models/auth-form-group.interface';
+import { authLogin, authRegister, authChangePassword, authSwitchMode } from './store/auth.actions';
+import { selectAuthCallState, selectAuthMode } from './store/auth.selectors';
+import { createAuthFormGroupUtil } from './utils/create-auth-formgroup';
 
 @Component({
   standalone: true,

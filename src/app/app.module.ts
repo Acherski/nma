@@ -14,9 +14,9 @@ import { SideNavComponent } from './shared/components/side-nav/side-nav.componen
 import { RouterModule } from '@angular/router';
 import { take } from 'rxjs';
 import { StoreModule } from '@ngrx/store';
-import { authReducer } from './feature/auth/store/auth.reducer';
+import { authReducer } from './auth/store/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthEffects } from './feature/auth/store/auth.effects';
+import { AuthEffects } from './auth/store/auth.effects';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
