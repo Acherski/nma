@@ -1,0 +1,16 @@
+export enum AuthActionTypes {
+  LOGIN = '[Auth] Login',
+  LOGIN_SUCCESS = '[Auth] Login success',
+  LOGIN_FAIL = '[Auth] Login fail',
+  LOGOUT = '[Auth] Logout',
+  REGISTER = '[Auth] Register',
+  CHANGE_PASSWORD = '[Auth] Change your own password',
+  CHANGE_PASSWORD_SUCCESS = '[Auth] Password changed successfully',
+  CHANGE_PASSWORD_FAIL = '[Auth] Password change fail',
+  SWITCH_MODE = '[Auth] Switch mode',
+  SWITCH_MODE_REG = '[Auth] Switched mode to register',
+  SWITCH_MODE_LOG = '[Auth] Switched mode to login',
+  SWITCH_MODE_PASS_CHANGE = '[Auth] Switched mode to password change',
+  REGISTER_SUCCESS = 'REGISTER_SUCCESS',
+  REGISTER_FAIL = 'REGISTER_FAIL',
+}

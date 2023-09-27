@@ -1,0 +1,6 @@
+<button mat-button [matMenuTriggerFor]="menu">{{ currentLanguage | uppercase }}</button>
+<mat-menu #menu="matMenu">
+  <button *ngFor="let language of languages" mat-menu-item (click)="setLanguage(language)">
+    {{ language.label | translate }}
+  </button>
+</mat-menu>

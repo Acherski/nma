@@ -1,0 +1,81 @@
+<ng-container
+  *ngrxLet="{
+    callState: componentStore.callState$,
+    userList: componentStore.listOfUsers$,
+    detailsCallState: componentStore.detailsCallState$,
+    attributes: componentStore.listOfAttributes$
+  } as vm">
+  <nma-header label="USERS.USERS_LIST" />
+
+  <div class="nma-user-list px-8 py-6">
+    <div *ngIf="vm.callState === LoadingState.LOADING" class="w-full flex justify-center">
+      <nma-spinner />
+    </div>
+
+    <div class="w-full mb-8" [style.display]="vm.callState === LoadingState.LOADED ? 'block' : 'none'">
+      <table mat-table matSort [dataSource]="dataSource" (matSortChange)="onSort()" multiTemplateDataRows>
+        <ng-container matColumnDef="no">
+          <th class="w-4" mat-header-cell *matHeaderCellDef>{{ 'TABLE.NO' | translate }}</th>
+          <td class="w-4" mat-cell *matCellDef="let element; let index = dataIndex">{{ index + 1 }}</td>
+        </ng-container>
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'USERS.USER_NAME' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              [matTooltip]="'BUTTON.CHANGE_PASSWORD' | translate"
+              matTooltipPosition="above"
+              (click)="onPasswordChange(element, $event)"
+              mat-button>
+              <mat-icon class="text-slate-600">vpn_key</mat-icon>
+            </button>
+            <button
+              [matTooltip]="'BUTTON.DELETE' | translate"
+              matTooltipPosition="above"
+              (click)="onUserDelete(element, $event)"
+              mat-button>
+              <mat-icon class="text-slate-600">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+            <div
+              class="example-element-detail"
+              [@detailExpand]="expandedElement && element === expandedElement ? 'expanded' : 'collapsed'">
+              <div class="example-element-diagram">
+                <p *ngFor="let attr of vm.attributes | keyvalue">
+                  <span *ngIf="attr.key && attr.value && element === expandedElement">
+                    {{ attr.key }}: {{ attr.value }}
+                  </span>
+                  <span *ngIf="!(attr.key || attr.value || element !== expandedElement)">
+                    {{ 'USERS.NO_ATTRIBUTES_FOUND' | translate }}
+                  </span>
+                </p>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          class="example-element-row hover:cursor-pointer"
+          (click)="loadUserAttributes(row)"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+      </table>
+    </div>
+
+    <mat-paginator
+      [length]="listOfUsers.length"
+      class="fixed bottom-0 right-0 w-[calc(100%-50px)]"
+      [pageSizeOptions]="pageSizeOptions"
+      [pageSize]="30"
+      showFirstLastButtons />
+  </div>
+</ng-container>

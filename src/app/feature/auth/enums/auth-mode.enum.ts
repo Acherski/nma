@@ -1,0 +1,5 @@
+export enum AuthModeEnum {
+  REGISTER = 'REGISTER',
+  LOGIN = 'LOGIN',
+  PASSWORD_CHANGE = 'PASSWORD_CHANGE',
+}

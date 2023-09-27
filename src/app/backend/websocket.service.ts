@@ -1,8 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { SnackBarService } from '../services/snackbar.service';
-import { StorageService } from '../services/storage.service';
+import { Observable, switchMap } from 'rxjs';
+import { SnackBarService } from '../shared/services/snackbar.service';
+import { StorageService } from '../shared/services/storage.service';
+import { RequestEnum } from './enums/requests.enum';
+import { WebSocketEventsEnum } from './enums/websocket-events.enum';
 
 // const websocketURL = 'ws://158.69.251.105:4242';
 const websocketURL = 'ws://localhost:4242';
@@ -11,9 +13,6 @@ const websocketURL = 'ws://localhost:4242';
   providedIn: 'root',
 })
 export class WebsocketService {
-  public messages: string[] = [];
-
-  private connected = new BehaviorSubject(false);
   private socket!: WebSocket;
   private requestIndex = 0;
   private router = inject(Router);
@@ -22,10 +21,6 @@ export class WebsocketService {
 
   public get reqIndex() {
     return this.requestIndex;
-  }
-
-  public get isConnected$() {
-    return this.connected;
   }
 
   public get webSocket$() {
@@ -37,50 +32,91 @@ export class WebsocketService {
     });
   }
 
-  public increaseReqIndex() {
-    this.requestIndex += 1;
+  public close() {
+    this.socket.close();
+  }
+
+  public disconnect(): void {
+    this.snackBarService.showInfoMessage('AUTH.DISCONNECTED');
+    this.storageService.removeSessionToken();
+    this.router.navigate(['login']);
   }
 
   public connect(): Observable<string> {
     this.socket = new WebSocket(websocketURL);
-    this.connected.next(true);
     return new Observable(observer => {
-      this.socket.onmessage = event => {
-        observer.next(event.data);
-        this.messages.push(event.data);
-      };
-      this.socket.onopen = () => observer.next('connected');
+      this.socket.onmessage = event => observer.next(event.data);
+      this.socket.onopen = () => observer.next(WebSocketEventsEnum.CONNECTED);
       this.socket.onerror = event => observer.error(event);
       this.socket.onclose = () => {
-        console.log('WEBSOCKET CLOSED/DISCONNECTED');
-        this.storageService.remove('loggedIn');
+        observer.next(WebSocketEventsEnum.DISCONNECTED);
         observer.complete();
       };
     });
   }
 
-  public disconnect() {
-    if (this.socket) this.socket.close();
-    this.connected.next(false);
-  }
-
-  public getAndSetIndex() {
+  protected getAndSetIndex() {
     const currentIndex = this.reqIndex;
-    this.increaseReqIndex();
+    this.requestIndex += 1;
     return currentIndex;
   }
 
   public sendMessage(message: string): Observable<string> {
-    if (!this.socket) {
-      this.snackBarService.showInfoMessage('AUTH.DISCONNECTED');
-      this.storageService.remove('loggedIn');
-      this.router.navigate(['login']);
-    }
+    const sessionToken = this.storageService.getSessionToken();
 
-    this.socket.send(message);
-    console.log(this.socket);
-    return new Observable(observer => {
-      this.socket.onmessage = event => observer.next(event.data);
-    });
+    if (!this.socket && sessionToken) {
+      return this.connectAndLoginWithToken(message, sessionToken);
+    } else if (!this.socket && !sessionToken) {
+      this.disconnect();
+      return this.webSocket$;
+    } else {
+      this.socket.send(message);
+      return this.webSocket$;
+    }
+  }
+
+  private connectAndLoginWithToken(message: string, sessionToken: string): Observable<string> {
+    return this.connect().pipe(
+      switchMap(() => this.loginWithToken(sessionToken)),
+      switchMap(res => {
+        if (res.split('|')[4] === '1') {
+          this.socket.send(message);
+          return this.webSocket$;
+        } else {
+          this.disconnect();
+          return this.webSocket$;
+        }
+      })
+    );
+  }
+
+  // AUTH REQUESTS
+  public login(login: string, password: string): Observable<string> {
+    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.LOGIN}|${login}|${password}`);
+    return this.webSocket$;
+  }
+
+  public loginWithToken(sessionToken: string): Observable<string> {
+    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.LOGIN_WITH_TOKEN}|${sessionToken}`);
+    return this.webSocket$;
+  }
+
+  public register(login: string, password: string, email: string): Observable<string> {
+    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.REGISTER}|${login}|${password}|${email}`);
+    return this.webSocket$;
+  }
+
+  public changePassword(newPassword: string, oldPassword?: string): Observable<string> {
+    return this.sendMessage(
+      `R|${this.getAndSetIndex()}|${RequestEnum.CHANGE_PASSWORD}|${oldPassword ?? ''}|${newPassword}`
+    );
+  }
+
+  public changePasswordAdminMode(userName: string, newPassword: string, enforceChange: boolean): Observable<string> {
+    return this.sendMessage(
+      `R|${this.getAndSetIndex()}|${RequestEnum.CHANGE_PASSWORD_ADMIN_MODE}|${userName}|${newPassword}|${Number(
+        enforceChange
+      )}`
+    );
   }
 }

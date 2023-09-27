@@ -1,14 +1,15 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LetDirective } from '@ngrx/component';
-import { provideComponentStore } from '@ngrx/component-store';
+import { Store } from '@ngrx/store';
 import { TranslateModule } from '@ngx-translate/core';
-import { LoadingState } from 'src/app/constants/callstate.constant';
+import { LoadingState } from 'src/app/shared/constants/callstate.constant';
 import { PasswordControlComponent } from 'src/app/design-system/controls/password-control/password-control.component';
 import { DialogContainerComponent } from 'src/app/design-system/dialog-container/dialog-container.component';
-import { AuthComponentStore } from 'src/app/views/auth/auth-component-store.service';
+import { selectAuthCallState } from 'src/app/feature/auth/store/auth.selectors';
+import { requiredNonNullable } from 'src/app/shared/constants/required-nonnullable.constant';
 
 @Component({
   standalone: true,
@@ -24,21 +25,29 @@ import { AuthComponentStore } from 'src/app/views/auth/auth-component-store.serv
     LetDirective,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [provideComponentStore(AuthComponentStore)],
 })
 export class ChangeOwnPasswordDialogComponent {
+  protected callState$ = this.store.select(selectAuthCallState);
   protected formGroup = new FormGroup({
-    oldPassword: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-    newPassword: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
-    reenterNewPassword: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
+    oldPassword: new FormControl<string>('', requiredNonNullable),
+    newPassword: new FormControl<string>('', requiredNonNullable),
+    reenterNewPassword: new FormControl<string>('', requiredNonNullable),
   });
 
   readonly LoadingState = LoadingState;
 
   constructor(
     public dialogRef: DialogRef<{ oldPassword: string; newPassword: string }>,
-    protected componentStore: AuthComponentStore
+    private store: Store
   ) {}
+
+  protected get passwordsDontMatch() {
+    return (
+      this.formGroup.controls.newPassword.value !== this.formGroup.controls.reenterNewPassword.value &&
+      this.formGroup.controls.newPassword.touched &&
+      this.formGroup.controls.reenterNewPassword.touched
+    );
+  }
 
   protected get formValid() {
     return (
@@ -47,7 +56,7 @@ export class ChangeOwnPasswordDialogComponent {
     );
   }
 
-  onConfirmClick() {
+  protected onConfirmClick() {
     this.dialogRef.close({
       oldPassword: this.formGroup.controls.oldPassword.value,
       newPassword: this.formGroup.controls.newPassword.value,

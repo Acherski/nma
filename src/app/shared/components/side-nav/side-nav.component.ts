@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 type SideNavLink = {
   icon: string;
   url: string;
-  tooltipText: string;
+  label: string;
 };
 
 @Component({
@@ -20,7 +20,7 @@ type SideNavLink = {
 })
 export class SideNavComponent {
   protected links: SideNavLink[] = [
-    { url: 'users', icon: 'people', tooltipText: 'SIDE_NAV.USERS' },
-    { url: 'server-settings', icon: 'computer', tooltipText: 'SIDE_NAV.SERVER_SETTINGS' },
+    { url: 'users', icon: 'people', label: 'SIDE_NAV.USERS' },
+    { url: 'server-settings', icon: 'computer', label: 'SIDE_NAV.SERVER_SETTINGS' },
   ];
 }

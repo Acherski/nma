@@ -1,4 +1,8 @@
 {
+  "LANGUAGES": {
+    "POLISH": "Polish",
+    "ENGLISH": "English"
+  },
   "AUTH": {
     "MANAGEMENT_APP": "Management system",
     "LOGIN": "Login",
@@ -10,7 +14,7 @@
     "LOG_IN": "Log in",
     "LOG_OUT": "Log out",
     "REGISTER": "Sign in",
-    "REGISTER_MODE": "Registration panel",
+    "REGISTER_MODE": "Create account",
     "LOGIN_MODE": "Login panel",
     "LOGIN_SUCCESS": "Logged in successfully",
     "REGISTER_SUCCESS": "Registered successfully. You can log to the appliacation now",

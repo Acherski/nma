@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatInputModule,
     MatCheckboxModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxControlComponent {
   @Input({ required: true }) label = '';

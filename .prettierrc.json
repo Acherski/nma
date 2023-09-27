@@ -21,5 +21,19 @@
   ],
   "importOrderParserPlugins": ["typescript", "classProperties", "decorators-legacy"],
   "importOrderSeparation": true,
-  "importOrderSortSpecifierrs": true
+  "importOrderSortSpecifierrs": true,
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.vue",
+      "options": {
+        "parser": "vue"
+      }
+    }
+  ]
 }

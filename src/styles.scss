@@ -6,6 +6,11 @@ html {
   overflow-x: hidden;
   height: 100%;
   margin-right: calc(-1 * (100vw - 100%));
+
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
 }
 
 body {

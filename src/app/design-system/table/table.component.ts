@@ -3,7 +3,7 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { CallState, LoadingState } from 'src/app/constants/callstate.constant';
+import { CallState, LoadingState } from 'src/app/shared/constants/callstate.constant';
 import { LetDirective } from '@ngrx/component';
 import { TableConfig } from './table-config.interface';
 import { MatIconModule } from '@angular/material/icon';

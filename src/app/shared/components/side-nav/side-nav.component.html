@@ -1,9 +1,9 @@
-<div class="w-[50px] h-[100vh] bg-slate-700 flex flex-col">
+<div class="w-[50px] h-full min-h-[100vh] bg-slate-700 flex flex-col">
   <div class="w-[50px] h-16 bg-slate-700"></div>
   <div
     class="w-[50px] h-[50px] flex items-center justify-center text-slate-100 hover:text-slate-400 hover:cursor-pointer first:mt-18"
     *ngFor="let link of links"
-    [matTooltip]="link.tooltipText | translate"
+    [matTooltip]="link.label | translate"
     matTooltipPosition="right"
     [routerLink]="link.url">
     <mat-icon>{{ link.icon }}</mat-icon>

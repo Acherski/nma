@@ -1,9 +1,8 @@
 <div class="w-full h-18 flex justify-between py-4 px-8 bg-slate-400 items-center">
   <p class="!m-0 text-lg">{{ label | translate }}</p>
   <div class="flex gap-2">
+    <nma-language-menu />
     <button mat-raised-button (click)="onChangePassword()">{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</button>
-    <button mat-raised-button (click)="onLogOut()">
-      {{ 'AUTH.LOG_OUT' | translate }}
-    </button>
+    <button mat-raised-button (click)="onLogOut()">{{ 'AUTH.LOG_OUT' | translate }}</button>
   </div>
 </div>

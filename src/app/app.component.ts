@@ -10,7 +10,7 @@ export class AppComponent {
     translate.addLangs(['en', 'pl']);
     translate.setDefaultLang('en');
 
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang && browserLang.match(/en|pl/) ? browserLang : 'en');
+    const language = localStorage.getItem('language') ?? translate.getBrowserLang();
+    translate.use(language && language.match(/en|pl/) ? language : 'en');
   }
 }
