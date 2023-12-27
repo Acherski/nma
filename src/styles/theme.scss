@@ -1,17 +1,17 @@
 @use '@angular/material' as mat;
-@import './colors';
+@use './colors';
 @include mat.core();
 
-$app-primary: mat-palette($nma-colors-primary);
-$app-accent: mat-palette($nma-colors-accent);
-$app-warn: mat-palette($nma-colors-warn);
-$brand-light-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+// $app-primary: mat-palette($nma-colors-primary);
+// $app-accent: mat-palette($nma-colors-accent);
+// $app-warn: mat-palette($nma-colors-warn);
+$brand-light-theme: mat-light-theme($nma-colors-primary, $nma-colors-accent, $nma-colors-warn);
 
 $my-theme: mat.define-light-theme(
   (
     color: (
-      primary: $app-primary,
-      accent: $app-accent,
+      primary: $nma-colors-primary,
+      accent: $nma-colors-accent,
     ),
     typography: mat.define-typography-config(),
     density: 0,
