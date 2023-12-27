@@ -9,6 +9,7 @@ import { ChangePasswordDialogData } from './models/password-dialog-data.interfac
 import { HttpErrorResponse } from '@angular/common/http';
 import { mapResponseToStringArray } from 'src/app/shared/utils/functions/map-backend-res-to-array.util';
 import { UserService } from 'src/app/backend/feature-services/user.service';
+import { tapWebsocketResponse } from 'src/app/shared/utils/rxjs-operators/tap-websocket-response.util';
 
 @Injectable()
 export class UserListComponentStore extends ComponentStore<UserListComponentStoreData> implements OnStoreInit {
@@ -54,6 +55,7 @@ export class UserListComponentStore extends ComponentStore<UserListComponentStor
       tap(() => this.patchState({ callState: LoadingState.LOADING })),
       switchMap(({ userName }) =>
         this.userService.removeUser(userName).pipe(
+          tapWebsocketResponse(),
           tapResponse(
             () => {
               this.patchState({ callState: LoadingState.LOADED });
@@ -63,6 +65,7 @@ export class UserListComponentStore extends ComponentStore<UserListComponentStor
             (errors: HttpErrorResponse) => {
               this.patchState({ callState: { error: errors.error } });
               this.snackBarService.showErrorMessage(errors.error ?? 'USERS.REMOVE_ERROR');
+              this.loadUsers();
             }
           )
         )
@@ -76,6 +79,7 @@ export class UserListComponentStore extends ComponentStore<UserListComponentStor
       tap(() => this.patchState({ callState: LoadingState.LOADING })),
       switchMap(({ userName, newPassword, enforceChange }) =>
         this.userService.changePasswordAdminMode(userName, newPassword, enforceChange).pipe(
+          tapWebsocketResponse(),
           tapResponse(
             () => {
               this.patchState({ callState: LoadingState.LOADED });
@@ -128,6 +132,55 @@ export class UserListComponentStore extends ComponentStore<UserListComponentStor
             },
             (errors: HttpErrorResponse) => {
               this.patchState({ detailsCallState: { error: errors.error } });
+            }
+          )
+        )
+      ),
+      takeUntilDestroyed(this.destroyRef)
+    )
+  );
+
+  readonly setAttribute = this.effect(
+    (trigger$: Observable<{ userName: string; attributeName: string; attributeValue: string }>) =>
+      trigger$.pipe(
+        tap(() => this.patchState({ callState: LoadingState.LOADING })),
+        switchMap(({ userName, attributeName, attributeValue }) =>
+          this.userService.setUserAttribute(userName, attributeName, attributeValue).pipe(
+            tapWebsocketResponse(),
+            tapResponse(
+              () => {
+                this.patchState({ callState: LoadingState.LOADED });
+                this.snackBarService.showSuccessMessage('USERS.ATTRIBUTE_SET_SUCCESS');
+                this.loadUsers();
+              },
+              (errors: HttpErrorResponse) => {
+                this.patchState({ callState: { error: errors.error } });
+                this.snackBarService.showErrorMessage(errors.error ?? 'USERS.ATTRIBUTE_SET_ERROR');
+                this.loadUsers();
+              }
+            )
+          )
+        ),
+        takeUntilDestroyed(this.destroyRef)
+      )
+  );
+
+  readonly deleteAttribute = this.effect((trigger$: Observable<{ userName: string; attribute: string }>) =>
+    trigger$.pipe(
+      tap(() => this.patchState({ callState: LoadingState.LOADING })),
+      switchMap(({ userName, attribute }) =>
+        this.userService.deleteUserAttribute(userName, attribute).pipe(
+          tapWebsocketResponse(),
+          tapResponse(
+            () => {
+              this.patchState({ callState: LoadingState.LOADED });
+              this.snackBarService.showSuccessMessage('USERS.ATTRIBUTE_REMOVE_SUCCESS');
+              this.loadUsers();
+            },
+            (errors: HttpErrorResponse) => {
+              this.patchState({ callState: { error: errors.error } });
+              this.snackBarService.showErrorMessage(errors.error ?? 'USERS.ATTRIBUTE_REMOVE_ERROR');
+              this.loadUsers();
             }
           )
         )

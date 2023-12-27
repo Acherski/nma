@@ -46,7 +46,16 @@
     "ENFORCE_PASSWORD_CHANGE": "Wymuś zmianę hasła po zalogowaniu",
     "CHANGE_PASSWORD_SUCCESS": "Pomyślnie zmieniono hasło użytkownika",
     "CHANGE_PASSWORD_ERROR": "Zmiana hasła zakończona niepowodzeniem",
-    "NO_ATTRIBUTES_FOUND": "Nie znaleziono atrybutów przypisanych do użytkownika"
+    "NO_ATTRIBUTES_FOUND": "Nie znaleziono atrybutów przypisanych do użytkownika",
+    "REMOVE_ATTRIBUTE_DIALOG_MESSAGE": "Czy na pewno chcesz usunąć atrybut '{{attr}}' u użytkownika {{userName}}?",
+    "ATTRIBUTE_REMOVE_SUCCESS": "Pomyślnie usunięto atrybut użytkownika",
+    "ATTRIBUTE_REMOVE_ERROR": "Błąd usuwania atrybutu użytkownika",
+    "ATTRIBUTE_SET_SUCCESS": "Pomyślnie dodano/edytowano atrybut użytkownika",
+    "ATTRIBUTE_SET_ERROR": "Błąd dodawania/edycji atrybutu użytkownika",
+    "ATTRIBUTE_NAME": "Nazwa atrybutu",
+    "ATTRIBUTE_VALUE": "Wartość atrybutu",
+    "ADD_ATTRIBUTE": "Dodaj nowy atrybut",
+    "EDIT_ATTRIBUTE": "Edytuj atrybut"
   },
   "SERVER_CONFIGURATION": {
     "TITLE": "Panel ustawień serwera",
@@ -84,5 +93,8 @@
   },
   "FORM": {
     "NO_VALUE": "Pole nie może być puste"
+  },
+  "ERRORS": {
+    "FAIL": "Coś poszło nie tak. Spróbuj ponownie za chwilę"
   }
 }

@@ -16,26 +16,26 @@
       <table mat-table matSort [dataSource]="dataSource" (matSortChange)="onSort()" multiTemplateDataRows>
         <ng-container matColumnDef="no">
           <th class="w-4" mat-header-cell *matHeaderCellDef>{{ 'TABLE.NO' | translate }}</th>
-          <td class="w-4" mat-cell *matCellDef="let element; let index = dataIndex">{{ index + 1 }}</td>
+          <td class="w-4" mat-cell *matCellDef="let user; let index = dataIndex">{{ index + 1 }}</td>
         </ng-container>
         <ng-container matColumnDef="userName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'USERS.USER_NAME' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+          <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
         </ng-container>
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
+          <td mat-cell *matCellDef="let user">
             <button
               [matTooltip]="'BUTTON.CHANGE_PASSWORD' | translate"
               matTooltipPosition="above"
-              (click)="onPasswordChange(element, $event)"
+              (click)="onPasswordChange(user, $event)"
               mat-button>
               <mat-icon class="text-slate-600">vpn_key</mat-icon>
             </button>
             <button
               [matTooltip]="'BUTTON.DELETE' | translate"
               matTooltipPosition="above"
-              (click)="onUserDelete(element, $event)"
+              (click)="onUserDelete(user, $event)"
               mat-button>
               <mat-icon class="text-slate-600">delete</mat-icon>
             </button>
@@ -43,19 +43,43 @@
         </ng-container>
 
         <ng-container matColumnDef="expandedDetail">
-          <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+          <td mat-cell *matCellDef="let user" [attr.colspan]="displayedColumns.length">
             <div
               class="overflow-hidden flex font-light"
-              [@detailExpand]="expandedElement && element === expandedElement ? 'expanded' : 'collapsed'">
+              [@detailExpand]="expandedElement && user === expandedElement ? 'expanded' : 'collapsed'">
               <div class="min-w-[80px] p-2">
-                <p *ngFor="let attr of vm.attributes | keyvalue">
-                  <span *ngIf="attr.key && attr.value && element === expandedElement">
-                    {{ attr.key }}: {{ attr.value }}
-                  </span>
-                  <span *ngIf="!(attr.key || attr.value || element !== expandedElement)">
+                <div *ngFor="let attr of vm.attributes | keyvalue; let index = index">
+                  <div
+                    *ngIf="attr.key && attr.value && user === expandedElement; else noAttributes"
+                    (mouseover)="hoveredAttributeId = index"
+                    (focus)="hoveredAttributeId = index"
+                    (mouseleave)="hoveredAttributeId = null"
+                    class="flex gap-1">
+                    <span> {{ attr.key }}: {{ attr.value }} </span>
+                    <div [class.hidden]="hoveredAttributeId !== index" class="flex gap-1">
+                      <button
+                        (click)="openAttributeDialog(user.userName, attr.key, attr.value)"
+                        class="hover:bg-gray-200 rounded flex h-5 w-5 border-[1px] justify-center items-center relative bottom-[1px]">
+                        <mat-icon class="text-xs relative top-1">edit</mat-icon>
+                      </button>
+                      <button
+                        (click)="onAttributeDelete(user.userName, attr.key)"
+                        class="hover:bg-gray-200 rounded flex h-5 w-5 border-[1px] justify-center items-center relative bottom-[1px]">
+                        <mat-icon class="text-xs relative top-1">delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <ng-template #noAttributes>
+                  <p *ngIf="expandedElement && user === expandedElement">
                     {{ 'USERS.NO_ATTRIBUTES_FOUND' | translate }}
-                  </span>
-                </p>
+                  </p>
+                </ng-template>
+                <button
+                  *ngIf="expandedElement && user === expandedElement"
+                  (click)="openAttributeDialog(user.userName)">
+                  {{ 'USERS.ADD_ATTRIBUTE' | translate }}
+                </button>
               </div>
             </div>
           </td>
@@ -66,7 +90,7 @@
           mat-row
           *matRowDef="let row; columns: displayedColumns"
           class="expanded-element-row hover:cursor-pointer"
-          (click)="loadUserAttributes(row)"></tr>
+          (click)="toggleAttributes(row)"></tr>
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="expanded-element-detail-row"></tr>
       </table>
     </div>

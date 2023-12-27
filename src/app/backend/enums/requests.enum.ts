@@ -15,4 +15,6 @@ export enum RequestEnum {
   LOAD_USER_ATTR_KEYS = 'LUA',
   LOAD_USER_ATTR_VALUES = 'GUA',
   REMOVE_USER = 'RMU',
+  SET_ATTR = 'SUA',
+  REMOVE_ATTR = 'DUA',
 }

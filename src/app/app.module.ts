@@ -17,6 +17,8 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './auth/store/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { MyMissingTranslationHandler } from './shared/services/missing-translations-handler.service';
+import { NotTranslatedService } from './shared/services/not-translated-service.service';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
@@ -59,7 +61,11 @@ export function appInitializerFactory(translateService: TranslateService, inject
         deps: [HttpClient],
       },
       isolate: false,
-      missingTranslationHandler: [{ provide: MissingTranslationHandler }],
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MyMissingTranslationHandler,
+        deps: [NotTranslatedService],
+      },
     }),
   ],
   providers: [

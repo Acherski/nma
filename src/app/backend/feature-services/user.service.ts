@@ -7,22 +7,30 @@ import { mapResponseToStringArray } from '../../shared/utils/functions/map-backe
 @Injectable()
 export class UserService extends WebsocketService {
   public loadUserList(): Observable<string> {
-    return this.sendMessage(`R|${this.getAndSetIndex()}|${RequestEnum.LOAD_USERS}`);
+    return this.sendMessage(`R|${this.getAndSetIndex}|${RequestEnum.LOAD_USERS}`);
   }
 
   public removeUser(userName: string): Observable<string> {
-    return this.sendMessage(`R|${this.getAndSetIndex()}|${RequestEnum.REMOVE_USER}|${userName}`);
+    return this.sendMessage(`R|${this.getAndSetIndex}|${RequestEnum.REMOVE_USER}|${userName}`);
   }
 
   public loadUserAttributeKeys(userName: string): Observable<string> {
-    return this.sendMessage(`R|${this.getAndSetIndex()}|${RequestEnum.LOAD_USER_ATTR_KEYS}|${userName}`);
+    return this.sendMessage(`R|${this.getAndSetIndex}|${RequestEnum.LOAD_USER_ATTR_KEYS}|${userName}`);
   }
 
   public loadUserAttributeValues(userName: string, attributes: string): Observable<string> {
     return this.sendMessage(
-      `R|${this.getAndSetIndex()}|${RequestEnum.LOAD_USER_ATTR_VALUES}|${userName}|${mapResponseToStringArray(
+      `R|${this.getAndSetIndex}|${RequestEnum.LOAD_USER_ATTR_VALUES}|${userName}|${mapResponseToStringArray(
         attributes
       ).join('|')}`
     );
+  }
+
+  public setUserAttribute(userName: string, attribute: string, value: string): Observable<string> {
+    return this.sendMessage(`R|${this.getAndSetIndex}|${RequestEnum.SET_ATTR}|${userName}|${attribute}|${value}`);
+  }
+
+  public deleteUserAttribute(userName: string, attribute: string): Observable<string> {
+    return this.sendMessage(`R|${this.getAndSetIndex}|${RequestEnum.REMOVE_ATTR}|${userName}|${attribute}`);
   }
 }

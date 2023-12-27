@@ -26,6 +26,8 @@ import { PaginatorService } from 'src/app/shared/services/page-config.service';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { User } from '../../feature/user-list/models/user.interface';
 import { UserService } from 'src/app/backend/feature-services/user.service';
+import { DeleteAttributeDialogComponent } from './dialogs/delete-attribute-dialog/delete-attribute-dialog.component';
+import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/user-attribute-dialog.component';
 
 @Component({
   selector: 'nma-user-list',
@@ -64,6 +66,7 @@ export class UserListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   protected displayedColumns: string[] = ['no', 'userName', 'actions'];
+  protected hoveredAttributeId: number | null = null;
   protected expandedElement: User | null = null;
   protected listOfUsers: User[] = [];
   protected dataSource!: MatTableDataSource<User>;
@@ -84,7 +87,7 @@ export class UserListComponent implements OnInit {
     this.updatePaginatorTranslations();
   }
 
-  protected onUserDelete(user: User, event: Event) {
+  onUserDelete(user: User, event: Event) {
     event.stopPropagation();
 
     const dialogRef = this.dialog.open<User>(DeleteUserDialogComponent, {
@@ -99,7 +102,40 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  protected onPasswordChange(user: User, event: Event) {
+  openAttributeDialog(userName: string, attributeName?: string, attributeValue?: string) {
+    const dialogRef = this.dialog.open<{ userName: string; attributeName: string; attributeValue: string }>(
+      UserAttributeDialogComponent,
+      {
+        width: '350px',
+        data: { userName, attributeName, attributeValue },
+      }
+    );
+
+    dialogRef.closed.subscribe(result => {
+      if (result && result.attributeName && result.attributeValue) {
+        this.componentStore.setAttribute({
+          userName,
+          attributeName: result.attributeName,
+          attributeValue: result.attributeValue,
+        });
+      }
+    });
+  }
+
+  onAttributeDelete(userName: string, attribute: string) {
+    const dialogRef = this.dialog.open<{ userName: string; attribute: string }>(DeleteAttributeDialogComponent, {
+      width: '350px',
+      data: { userName, attribute },
+    });
+
+    dialogRef.closed.subscribe(result => {
+      if (result) {
+        this.componentStore.deleteAttribute({ userName, attribute });
+      }
+    });
+  }
+
+  onPasswordChange(user: User, event: Event) {
     event.stopPropagation();
 
     const dialogRef = this.dialog.open<ChangePasswordDialogData>(ChangePasswordDialogComponent, {
@@ -117,7 +153,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  protected loadUserAttributes(row: User) {
+  toggleAttributes(row: User) {
     if (row === this.expandedElement) {
       this.expandedElement = null;
       return;
@@ -135,7 +171,7 @@ export class UserListComponent implements OnInit {
       .subscribe();
   }
 
-  protected onSort() {
+  onSort() {
     this.expandedElement = null;
     this.componentStore.loadUsers();
   }

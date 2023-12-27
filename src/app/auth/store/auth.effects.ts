@@ -26,6 +26,7 @@ import { WebsocketService } from 'src/app/backend/websocket.service';
 import { RegisterData } from '../models/register.interface';
 import { WebSocketEventsEnum } from 'src/app/backend/enums/websocket-events.enum';
 import { LoginData } from '../models/login-data.interface';
+import { tapWebsocketResponse } from 'src/app/shared/utils/rxjs-operators/tap-websocket-response.util';
 
 @Injectable()
 export class AuthEffects {
@@ -93,6 +94,7 @@ export class AuthEffects {
               .register(login, password, email)
               .pipe(
                 take(1),
+                tapWebsocketResponse(),
                 tapResponse(
                   () => {
                     this.snackBarService.showSuccessMessage('AUTH.REGISTER_SUCCESS');
@@ -120,6 +122,7 @@ export class AuthEffects {
         ofType(AuthActionTypes.CHANGE_PASSWORD),
         switchMap(({ oldPassword, newPassword }) =>
           this.websocketService.changePassword(newPassword, oldPassword).pipe(
+            tapWebsocketResponse(),
             tapResponse(
               () => {
                 this.store.dispatch(authChangePasswordSuccess());

@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --white: #fff;
+  --green: #005f19;
+  --red: #860000;
+  --blue: #0056a7;
+}
+
 html {
   overflow-x: hidden;
   height: 100%;
@@ -21,24 +28,28 @@ body {
 
 .mat-mdc-snack-bar-container {
   &.success-snackbar {
-    --mdc-snackbar-container-color: #005f19;
-    --mat-mdc-snack-bar-button-color: #fff;
-    --mdc-snackbar-supporting-text-color: #fff;
+    --mdc-snackbar-container-color: var(--green);
+    --mat-mdc-snack-bar-button-color: var(--white);
+    --mdc-snackbar-supporting-text-color: var(--white);
   }
 
   &.error-snackbar {
-    --mdc-snackbar-container-color: #860000;
-    --mat-mdc-snack-bar-button-color: #fff !important;
-    --mdc-snackbar-supporting-text-color: #fff;
+    --mdc-snackbar-container-color: var(--red);
+    --mat-mdc-snack-bar-button-color: var(--white);
+    --mdc-snackbar-supporting-text-color: var(--white);
   }
 
   &.info-snackbar {
-    --mdc-snackbar-container-color: #0056a7;
-    --mat-mdc-snack-bar-button-color: #fff !important;
-    --mdc-snackbar-supporting-text-color: #fff;
+    --mdc-snackbar-container-color: var(--blue);
+    --mat-mdc-snack-bar-button-color: var(--white);
+    --mdc-snackbar-supporting-text-color: var(--white);
   }
 }
 
 .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
-  color: #fff !important;
+  color: var(--white) !important;
+}
+
+.cdk-global-scrollblock {
+  overflow-y: hidden;
 }

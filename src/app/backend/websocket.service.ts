@@ -55,7 +55,7 @@ export class WebsocketService {
     });
   }
 
-  protected getAndSetIndex() {
+  protected get getAndSetIndex() {
     const currentIndex = this.reqIndex;
     this.requestIndex += 1;
     return currentIndex;
@@ -92,29 +92,29 @@ export class WebsocketService {
 
   // AUTH REQUESTS
   public login(login: string, password: string): Observable<string> {
-    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.LOGIN}|${login}|${password}`);
+    this.socket.send(`R|${this.getAndSetIndex}|${RequestEnum.LOGIN}|${login}|${password}`);
     return this.webSocket$;
   }
 
   public loginWithToken(sessionToken: string): Observable<string> {
-    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.LOGIN_WITH_TOKEN}|${sessionToken}`);
+    this.socket.send(`R|${this.getAndSetIndex}|${RequestEnum.LOGIN_WITH_TOKEN}|${sessionToken}`);
     return this.webSocket$;
   }
 
   public register(login: string, password: string, email: string): Observable<string> {
-    this.socket.send(`R|${this.getAndSetIndex()}|${RequestEnum.REGISTER}|${login}|${password}|${email}`);
+    this.socket.send(`R|${this.getAndSetIndex}|${RequestEnum.REGISTER}|${login}|${password}|${email}`);
     return this.webSocket$;
   }
 
   public changePassword(newPassword: string, oldPassword?: string): Observable<string> {
     return this.sendMessage(
-      `R|${this.getAndSetIndex()}|${RequestEnum.CHANGE_PASSWORD}|${oldPassword ?? ''}|${newPassword}`
+      `R|${this.getAndSetIndex}|${RequestEnum.CHANGE_PASSWORD}|${oldPassword ?? ''}|${newPassword}`
     );
   }
 
   public changePasswordAdminMode(userName: string, newPassword: string, enforceChange: boolean): Observable<string> {
     return this.sendMessage(
-      `R|${this.getAndSetIndex()}|${RequestEnum.CHANGE_PASSWORD_ADMIN_MODE}|${userName}|${newPassword}|${Number(
+      `R|${this.getAndSetIndex}|${RequestEnum.CHANGE_PASSWORD_ADMIN_MODE}|${userName}|${newPassword}|${Number(
         enforceChange
       )}`
     );

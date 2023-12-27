@@ -46,7 +46,16 @@
     "ENFORCE_PASSWORD_CHANGE": "Enforce password change",
     "CHANGE_PASSWORD_SUCCESS": "User password changed successfully",
     "CHANGE_PASSWORD_ERROR": "User password change failed",
-    "NO_ATTRIBUTES_FOUND": "No attributes found"
+    "NO_ATTRIBUTES_FOUND": "No attributes found",
+    "REMOVE_ATTRIBUTE_DIALOG_MESSAGE": "Are you sure you want to delete attribute '{{attr}}' from user {{userName}}?",
+    "ATTRIBUTE_REMOVE_SUCCESS": "Attribute removed successfully",
+    "ATTRIBUTE_REMOVE_ERROR": "Error occured while deleting attribute",
+    "ATTRIBUTE_SET_SUCCESS": "Attribute set successfully",
+    "ATTRIBUTE_SET_ERROR": "Error occured while setting attribute",
+    "ATTRIBUTE_NAME": "Attribute name",
+    "ATTRIBUTE_VALUE": "Attribute value",
+    "ADD_ATTRIBUTE": "Add new attribute",
+    "EDIT_ATTRIBUTE": "Edit attribute"
   },
   "SERVER_CONFIGURATION": {
     "TITLE": "Server configuration panel",
@@ -84,5 +93,8 @@
   },
   "FORM": {
     "NO_VALUE": "Field cannot be empty"
+  },
+  "ERRORS": {
+    "FAIL": "Something went wrong. Try again later."
   }
 }

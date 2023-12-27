@@ -1,0 +1,81 @@
+$primary: #1e2749;
+$black: #000000;
+$white: #fff;
+$green: #005f19;
+$red: #860000;
+$blue: #0056a7;
+
+$nma-colors-primary: (
+  50: #73788d,
+  100: #4e5468,
+  200: #424965,
+  300: #2f3a68,
+  400: #303b68,
+  500: #273469,
+  600: #26325d,
+  700: #233160,
+  800: #1e2749,
+  900: $primary,
+  contrast: (
+    50: $black,
+    100: $white,
+    200: $white,
+    300: $white,
+    400: $white,
+    500: $white,
+    600: $white,
+    700: $white,
+    800: $white,
+    900: $white,
+  ),
+);
+
+$nma-colors-accent: (
+  50: #979ca0,
+  100: #939da6,
+  200: #718fab,
+  300: #3976af,
+  400: #1762a8,
+  500: $blue,
+  600: #004f98,
+  700: #004280,
+  800: #003b71,
+  900: #00284e,
+  contrast: (
+    50: $black,
+    100: $black,
+    200: $black,
+    300: $white,
+    400: $white,
+    500: $white,
+    600: $white,
+    700: $white,
+    800: $white,
+    900: $white,
+  ),
+);
+
+$nma-colors-warn: (
+  50: #fbe9e7,
+  100: #ffccbc,
+  200: #ffab91,
+  300: #ff8965,
+  400: #ff6f43,
+  500: #fd683b,
+  600: #f4501e,
+  700: #e64919,
+  800: #d84215,
+  900: $red,
+  contrast: (
+    50: $black,
+    100: $black,
+    200: $black,
+    300: $black,
+    400: $black,
+    500: $white,
+    600: $white,
+    700: $white,
+    800: $white,
+    900: $white,
+  ),
+);
