@@ -1,6 +1,30 @@
+@use '@angular/material' as mat;
+@import 'styles/colors.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@include mat.core();
+
+$my-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: (
+        normal: $nma-colors-primary,
+        light: $nma-colors-primary,
+      ),
+      accent: (
+        normal: $nma-colors-accent,
+        light: $nma-colors-accent,
+      ),
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($my-theme);
 
 :root {
   --white: #fff;
