@@ -2,14 +2,14 @@
   <ng-container *ngIf="callState !== LoadingState.LOADING; else spinner">
     <ng-container *ngIf="callState === LoadingState.INIT || callState === LoadingState.LOADED; else error">
       <table *ngrxLet="data as items" class="w-full nma-table">
-        <tr class="bg-slate-600 text-slate-100">
+        <tr class="bg-primary-600 text-primary-100">
           <th *ngIf="config.noColumnDisplay" class="w-[60px] p-2 text-start">{{ 'TABLE.NO' | translate }}</th>
           <ng-container *ngFor="let column of config.columns">
             <th class="text-start p-2">{{ column | translate }}</th>
           </ng-container>
           <th *ngIf="config.editButton || config.deleteButton"></th>
         </tr>
-        <tr *ngFor="let item of items; let index = index" class="hover:bg-slate-200 odd:bg-slate-100">
+        <tr *ngFor="let item of items; let index = index" class="hover:bg-primary-200 odd:bg-primary-100">
           <th *ngIf="config.noColumnDisplay" class="w-[60px] text-start p-2">{{ index + 1 }}.</th>
           <th class="text-start p-2">{{ item }}</th>
           <th *ngIf="config.editButton || config.deleteButton" class="text-end p-2">
@@ -19,7 +19,7 @@
               matTooltipPosition="above"
               (click)="onChangePasswordEvent(item)"
               mat-button>
-              <mat-icon class="text-slate-600">vpn_key</mat-icon>
+              <mat-icon class="text-primary-600">vpn_key</mat-icon>
             </button>
             <button
               *ngIf="config.editButton"
@@ -27,7 +27,7 @@
               matTooltipPosition="above"
               (click)="onEditEvent(item)"
               mat-button>
-              <mat-icon class="text-slate-600">edit</mat-icon>
+              <mat-icon class="text-primary-600">edit</mat-icon>
             </button>
             <button
               *ngIf="config.deleteButton"
@@ -35,7 +35,7 @@
               matTooltipPosition="above"
               (click)="onDeleteEvent(item)"
               mat-button>
-              <mat-icon class="text-slate-600">delete</mat-icon>
+              <mat-icon class="text-primary-600">delete</mat-icon>
             </button>
           </th>
         </tr>

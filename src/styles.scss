@@ -1,5 +1,5 @@
 @use '@angular/material' as mat;
-@import 'styles/colors.scss';
+@use 'styles/colors' as *;
 
 @tailwind base;
 @tailwind components;
@@ -10,14 +10,9 @@
 $my-theme: mat.define-light-theme(
   (
     color: (
-      primary: (
-        normal: $nma-colors-primary,
-        light: $nma-colors-primary,
-      ),
-      accent: (
-        normal: $nma-colors-accent,
-        light: $nma-colors-accent,
-      ),
+      primary: mat.define-palette($nma-colors-primary),
+      accent: mat.define-palette($nma-colors-accent),
+      warn: mat.define-palette($nma-colors-warn),
     ),
     typography: mat.define-typography-config(),
     density: 0,
@@ -26,11 +21,18 @@ $my-theme: mat.define-light-theme(
 
 @include mat.all-component-themes($my-theme);
 
-:root {
-  --white: #fff;
-  --green: #005f19;
-  --red: #860000;
-  --blue: #0056a7;
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette($nma-colors-primary),
+      accent: mat.define-palette($nma-colors-accent),
+      warn: mat.define-palette($nma-colors-warn),
+    ),
+  )
+);
+
+.dark {
+  @include mat.all-component-colors($dark-theme);
 }
 
 html {
@@ -52,26 +54,26 @@ body {
 
 .mat-mdc-snack-bar-container {
   &.success-snackbar {
-    --mdc-snackbar-container-color: var(--green);
-    --mat-mdc-snack-bar-button-color: var(--white);
-    --mdc-snackbar-supporting-text-color: var(--white);
+    --mdc-snackbar-container-color: #{$green};
+    --mat-mdc-snack-bar-button-color: #{$white};
+    --mdc-snackbar-supporting-text-color: #{$white};
   }
 
   &.error-snackbar {
-    --mdc-snackbar-container-color: var(--red);
-    --mat-mdc-snack-bar-button-color: var(--white);
-    --mdc-snackbar-supporting-text-color: var(--white);
+    --mdc-snackbar-container-color: #{$red};
+    --mat-mdc-snack-bar-button-color: #{$white};
+    --mdc-snackbar-supporting-text-color: #{$white};
   }
 
   &.info-snackbar {
-    --mdc-snackbar-container-color: var(--blue);
-    --mat-mdc-snack-bar-button-color: var(--white);
-    --mdc-snackbar-supporting-text-color: var(--white);
+    --mdc-snackbar-container-color: #{$blue};
+    --mat-mdc-snack-bar-button-color: #{$white};
+    --mdc-snackbar-supporting-text-color: #{$white};
   }
 }
 
 .mat-mdc-snack-bar-container .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
-  color: var(--white) !important;
+  color: #{$white} !important;
 }
 
 .cdk-global-scrollblock {

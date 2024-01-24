@@ -1,5 +1,5 @@
-<div class="bg-white rounded-md flex flex-col">
-  <div *ngIf="titleHeader" class="flex items-center justify-between pt-6 pb-4 px-6 border-b-2 border-slate-100">
+<div class="bg-white dark:bg-stone-700 rounded-md flex flex-col">
+  <div *ngIf="titleHeader" class="flex items-center justify-between pt-6 pb-4 px-6 border-b-2 border-primary-100">
     <p class="!m-0 text-lg">{{ titleHeader | translate }}</p>
     <button (click)="onDismiss()">
       <mat-icon>close</mat-icon>
@@ -10,7 +10,7 @@
     <ng-content select="[content]"></ng-content>
   </div>
 
-  <div class="flex gap-4 justify-end p-6 border-t-2 border-slate-100">
+  <div class="flex gap-4 justify-end p-6 border-t-2 border-primary-100">
     <ng-container *ngIf="!customActionButtons">
       <button mat-raised-button (click)="onDismiss()">
         {{ customCancelBtnName ? (customCancelBtnName | translate) : ('BUTTON.CANCEL' | translate) }}

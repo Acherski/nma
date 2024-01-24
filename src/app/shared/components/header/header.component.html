@@ -1,6 +1,11 @@
-<div class="w-full h-18 flex justify-between py-4 px-8 bg-slate-400 items-center">
+<div class="w-full h-18 flex justify-between py-4 px-8 bg-secondary-100 dark:bg-stone-800 items-center">
   <p class="!m-0 text-lg">{{ label | translate }}</p>
+
   <div class="flex gap-2">
+    <mat-slide-toggle [formControl]="darkModeControl" class="mr-8" />
+    <span *ngIf="darkModeControl.value" class="material-icons">dark_mode</span>
+    <span *ngIf="!darkModeControl.value" class="material-icons">light_mode</span>
+
     <nma-language-menu />
     <button mat-raised-button (click)="onChangePassword()">{{ 'BUTTON.CHANGE_PASSWORD' | translate }}</button>
     <button mat-raised-button (click)="onLogOut()">{{ 'AUTH.LOG_OUT' | translate }}</button>

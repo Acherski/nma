@@ -5,6 +5,8 @@ $green: #005f19;
 $red: #860000;
 $blue: #0056a7;
 
+$dark-primary: #0f1425;
+
 $nma-colors-primary: (
   50: #73788d,
   100: #4e5468,
@@ -72,6 +74,31 @@ $nma-colors-warn: (
     200: $black,
     300: $black,
     400: $black,
+    500: $white,
+    600: $white,
+    700: $white,
+    800: $white,
+    900: $white,
+  ),
+);
+
+$nma-colors-dark-primary: (
+  50: #fbe9e7,
+  100: #ffccbc,
+  200: #ffab91,
+  300: #ff8965,
+  400: #ff6f43,
+  500: #fd683b,
+  600: #f4501e,
+  700: #e64919,
+  800: #d84215,
+  900: $red,
+  contrast: (
+    50: $white,
+    100: $white,
+    200: $white,
+    300: $white,
+    400: $white,
     500: $white,
     600: $white,
     700: $white,
