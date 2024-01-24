@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { TranslateModule } from '@ngx-translate/core';
 import { tap } from 'rxjs';
+import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-button.component';
 import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 
 @Component({
@@ -12,10 +10,11 @@ import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
   selector: 'nma-dark-mode-switch',
   templateUrl: 'dark-mode-switch.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TranslateModule, MatIconModule, MatTooltipModule, ReactiveFormsModule],
+  imports: [ReactiveFormsModule, IconButtonComponent],
 })
 export class DarkModeSwitchComponent implements OnInit {
   darkModeControl = new FormControl(false);
+  icon = this.darkModeControl.value ? 'light_mode' : 'dark_mode';
 
   private destroyRef = inject(DestroyRef);
   private darkModeService = inject(DarkModeService);
