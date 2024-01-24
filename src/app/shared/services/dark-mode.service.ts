@@ -3,13 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DarkModeService {
-  private darkMode = new BehaviorSubject<string>('');
+  private darkMode = new BehaviorSubject<boolean>(false);
 
-  get darkMode$(): Observable<string> {
+  get darkMode$(): Observable<boolean> {
     return this.darkMode.asObservable();
   }
 
-  setMode(value: string) {
+  setMode(value: boolean) {
     this.darkMode.next(value);
   }
 }

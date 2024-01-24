@@ -1,23 +1,30 @@
 import { NgIf } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'nma-icon-button',
   templateUrl: 'icon-button.component.html',
   imports: [MatIconModule, TranslateModule, MatTooltipModule, NgIf],
 })
-export class IconButtonComponent {
+export class IconButtonComponent implements OnInit {
   @Input({ required: true }) icon = '';
-  @Input() tooltipText?: string;
-
+  @Input() tooltipText = '';
+  @Input() customTailwindClasses?: string;
   @Output() clickEvent = new EventEmitter<void>();
 
-  onClick() {
+  iconStyles = 'hover:scale-125 dark:text-gray-200 text-primary-600';
+
+  ngOnInit(): void {
+    this.iconStyles = `${this.iconStyles} ${this.customTailwindClasses}`;
+  }
+
+  onClick(event: Event): void {
+    event.stopPropagation();
     this.clickEvent.emit();
   }
 }

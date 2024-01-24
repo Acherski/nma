@@ -4,7 +4,6 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
-import { ServerConfigurationComponent } from '../server-configuration/server-configuration.component';
 import { provideComponentStore } from '@ngrx/component-store';
 import { UserListComponentStore } from './user-list-component-store.store';
 import { LetDirective } from '@ngrx/component';
@@ -28,6 +27,7 @@ import { User } from '../../feature/user-list/models/user.interface';
 import { UserService } from 'src/app/backend/feature-services/user.service';
 import { DeleteAttributeDialogComponent } from './dialogs/delete-attribute-dialog/delete-attribute-dialog.component';
 import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/user-attribute-dialog.component';
+import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-button.component';
 
 @Component({
   selector: 'nma-user-list',
@@ -41,7 +41,6 @@ import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/us
     TranslateModule,
     MatButtonModule,
     DialogModule,
-    ServerConfigurationComponent,
     LetDirective,
     SpinnerComponent,
     SideNavComponent,
@@ -51,6 +50,7 @@ import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/us
     CdkAccordionModule,
     MatPaginatorModule,
     MatSortModule,
+    IconButtonComponent,
   ],
   providers: [provideComponentStore(UserListComponentStore), UserService],
   animations: [
@@ -87,9 +87,7 @@ export class UserListComponent implements OnInit {
     this.updatePaginatorTranslations();
   }
 
-  onUserDelete(user: User, event: Event) {
-    event.stopPropagation();
-
+  onUserDelete(user: User) {
     const dialogRef = this.dialog.open<User>(DeleteUserDialogComponent, {
       width: '350px',
       data: { userName: user.userName },
@@ -135,9 +133,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  onPasswordChange(user: User, event: Event) {
-    event.stopPropagation();
-
+  onPasswordChange(user: User) {
     const dialogRef = this.dialog.open<ChangePasswordDialogData>(ChangePasswordDialogComponent, {
       width: '350px',
       data: { userName: user.userName },

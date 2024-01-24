@@ -25,20 +25,13 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let user">
-            <button
-              [matTooltip]="'BUTTON.CHANGE_PASSWORD' | translate"
-              matTooltipPosition="above"
-              (click)="onPasswordChange(user, $event)"
-              mat-button>
-              <mat-icon class="text-primary-600">vpn_key</mat-icon>
-            </button>
-            <button
-              [matTooltip]="'BUTTON.DELETE' | translate"
-              matTooltipPosition="above"
-              (click)="onUserDelete(user, $event)"
-              mat-button>
-              <mat-icon class="text-primary-600">delete</mat-icon>
-            </button>
+            <div class="flex gap-4 items-end justify-end">
+              <nma-icon-button
+                tooltipText="BUTTON.CHANGE_PASSWORD"
+                icon="vpn_key"
+                (clickEvent)="onPasswordChange(user)" />
+              <nma-icon-button tooltipText="BUTTON.DELETE" icon="delete" (clickEvent)="onUserDelete(user)" />
+            </div>
           </td>
         </ng-container>
 

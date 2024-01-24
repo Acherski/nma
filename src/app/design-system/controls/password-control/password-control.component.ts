@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslateModule } from '@ngx-translate/core';
+import { IconButtonComponent } from '../../icon-button/icon-button.component';
 
 @Component({
   standalone: true,
@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     TranslateModule,
     MatInputModule,
-    MatIconModule,
+    IconButtonComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

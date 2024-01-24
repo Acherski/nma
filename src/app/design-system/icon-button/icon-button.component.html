@@ -1,8 +1,9 @@
-<div class="flex items-center justify-center">
-  <button *ngIf="tooltipText" (click)="onClick()" class="material-icons" [matTooltip]="tooltipText! | translate">
-    <mat-icon class="hover:scale-125 dark:text-gray-200">{{ icon }}</mat-icon>
-  </button>
-  <button *ngIf="!tooltipText" (click)="onClick()" class="material-icons">
-    <mat-icon class="hover:scale-125 dark:text-gray-200">{{ icon }}</mat-icon>
+<div class="flex items-center justify-center relative">
+  <button
+    (click)="onClick($event)"
+    class="material-icons"
+    [matTooltipDisabled]="!tooltipText.length"
+    [matTooltip]="tooltipText | translate">
+    <mat-icon [class]="iconStyles">{{ icon }}</mat-icon>
   </button>
 </div>

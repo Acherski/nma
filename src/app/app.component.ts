@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { DarkModeService } from './shared/services/dark-mode.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
@@ -7,7 +7,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   selector: 'nma-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   @HostBinding('class') className = '';
 
   constructor(
@@ -20,14 +20,12 @@ export class AppComponent implements OnInit {
 
     const language = localStorage.getItem('language') ?? translate.getBrowserLang();
     translate.use(language && language.match(/en|pl/) ? language : 'en');
-  }
 
-  ngOnInit(): void {
-    const darkMode = localStorage.getItem('darkClassName');
-    darkMode !== 'dark' ? (this.className = '') : (this.className = 'dark');
+    // const darkMode = localStorage.getItem('darkClassName');
+    // darkMode !== 'dark' ? (this.className = '') : (this.className = 'dark');
 
     this.darkModeService.darkMode$.subscribe(value => {
-      this.className = value;
+      value ? (this.className = 'dark') : (this.className = '');
       if (value) {
         this.overlay.getContainerElement().classList.add('dark');
       } else {

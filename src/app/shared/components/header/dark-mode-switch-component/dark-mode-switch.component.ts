@@ -22,7 +22,7 @@ export class DarkModeSwitchComponent implements OnInit {
   ngOnInit(): void {
     const darkMode = localStorage.getItem('darkClassName');
     if (darkMode) {
-      this.darkModeService.setMode(darkMode);
+      this.darkModeService.setMode(true);
       this.darkModeControl.setValue(true);
     }
 
@@ -31,10 +31,10 @@ export class DarkModeSwitchComponent implements OnInit {
         tap(darkMode => {
           if (darkMode) {
             localStorage.setItem('darkClassName', 'dark');
-            this.darkModeService.setMode('dark');
+            this.darkModeService.setMode(true);
           } else {
             localStorage.setItem('darkClassName', '');
-            this.darkModeService.setMode('');
+            this.darkModeService.setMode(false);
           }
         }),
         takeUntilDestroyed(this.destroyRef)
