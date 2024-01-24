@@ -1,0 +1,8 @@
+<div class="flex items-center justify-center">
+  <button
+    (click)="toggleDarkMode()"
+    class="material-icons"
+    [matTooltip]="darkModeControl.value ? ('HEADER.SWITCH_TO_LIGHT_MODE' | translate) : ('HEADER.SWITCH_TO_DARK_MODE' | translate)">
+    <mat-icon class="hover:scale-125">{{ darkModeControl.value ? 'light_mode' : 'dark_mode'}}</mat-icon>
+  </button>
+</div>

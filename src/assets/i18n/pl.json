@@ -91,6 +91,10 @@
     "USERS": "Użytkownicy",
     "SERVER_SETTINGS": "Ustawienia serwera"
   },
+  "HEADER": {
+    "SWITCH_TO_LIGHT_MODE": "Zmień na tryb jasny",
+    "SWITCH_TO_DARK_MODE": "Zmień na tryb ciemny"
+  },
   "FORM": {
     "NO_VALUE": "Pole nie może być puste"
   },
