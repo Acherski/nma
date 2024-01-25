@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DarkModeService {
-  private darkMode = new BehaviorSubject<boolean>(false);
+  private darkMode = new Subject<boolean>();
 
   get darkMode$(): Observable<boolean> {
     return this.darkMode.asObservable();
