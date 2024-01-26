@@ -22,11 +22,11 @@ export class LanguageMenuComponent {
     private storageService: StorageService
   ) {}
 
-  protected get currentLanguage() {
+  protected get currentLanguage(): string {
     return this.translateService.currentLang;
   }
 
-  protected setLanguage(value: LanguageItem) {
+  protected setLanguage(value: LanguageItem): void {
     this.storageService.setLanguage(value.shortName);
     this.translateService.use(value.shortName);
   }

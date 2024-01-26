@@ -5,12 +5,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
+import { ButtonComponent } from '../button/button.component';
 
 @Component({
   standalone: true,
   selector: 'nma-dialog-container',
   templateUrl: 'dialog-container.component.html',
-  imports: [DialogModule, CommonModule, TranslateModule, MatButtonModule, IconButtonComponent, SpinnerComponent],
+  imports: [
+    DialogModule,
+    CommonModule,
+    TranslateModule,
+    MatButtonModule,
+    IconButtonComponent,
+    SpinnerComponent,
+    ButtonComponent,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContainerComponent {
@@ -25,11 +34,11 @@ export class DialogContainerComponent {
 
   constructor(public dialogRef: DialogRef<string>) {}
 
-  onDismiss() {
+  onDismiss(): void {
     this.dialogRef.close();
   }
 
-  onConfirm() {
+  onConfirm(): void {
     this.confirmClick.emit();
     this.dialogRef.close('true');
   }

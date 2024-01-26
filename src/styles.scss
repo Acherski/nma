@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @use 'styles/colors' as *;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,7 +25,7 @@ $my-theme: mat.define-light-theme(
 $dark-theme: mat.define-dark-theme(
   (
     color: (
-      primary: mat.define-palette($nma-colors-primary),
+      primary: mat.define-palette($nma-colors-dark-primary),
       accent: mat.define-palette($nma-colors-accent),
       warn: mat.define-palette($nma-colors-warn),
     ),
@@ -33,6 +34,10 @@ $dark-theme: mat.define-dark-theme(
 
 .dark {
   @include mat.all-component-colors($dark-theme);
+}
+
+* {
+  font-family: 'Raleway', sans-serif;
 }
 
 html {
@@ -49,7 +54,8 @@ html {
 body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  // font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .mat-mdc-snack-bar-container {
@@ -78,4 +84,8 @@ body {
 
 .cdk-global-scrollblock {
   overflow-y: hidden;
+}
+
+.mdc-notched-outline__notch {
+  border-right: none;
 }

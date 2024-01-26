@@ -1,0 +1,23 @@
+.nma-button {
+  @apply border-solid border-[1px] min-h-9 max-h-9 min-w-10 rounded-full flex items-center justify-center relative;
+
+  &__primary {
+    @apply bg-primary-300 border-primary-300 text-white hover:bg-primary-400 hover:border-transparent;
+  }
+
+  &__secondary {
+    @apply border-primary-600 text-primary-600 hover:bg-primary-400 hover:border-transparent dark:text-white;
+  }
+
+  &__icon {
+    @apply flex items-center ml-2 scale-[60%] group-hover:bg-primary-400 group-hover:text-white relative top-[1px];
+  }
+
+  &__disabled {
+    @apply pointer-events-none bg-stone-200 dark:bg-stone-600 border-stone-200 dark:border-stone-600 text-stone-400 dark:text-stone-400;
+  }
+
+  &__text {
+    @apply my-[0.45rem] mr-4 group-hover:bg-primary-400 group-hover:text-white text-sm font-light;
+  }
+}

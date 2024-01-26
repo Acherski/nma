@@ -1,23 +1,26 @@
-<div class="bg-white dark:bg-stone-700 rounded-md flex flex-col">
-  <div *ngIf="titleHeader" class="flex items-center justify-between pt-6 pb-4 px-6 border-b-2 border-primary-100">
-    <p class="!m-0 text-lg">{{ titleHeader | translate }}</p>
+<div
+  class="bg-white border-stone-500 dark:bg-stone-800 dark:border-stone-700 border-solid border-[1px] rounded-md flex flex-col">
+  <div *ngIf="titleHeader" class="flex items-center justify-between pt-6 pb-4 px-6 border-primary-100 dark:text-white">
+    <p class="!m-0 text-lg font-semibold">{{ titleHeader | translate }}</p>
     <nma-icon-button icon="close" (clickEvent)="onDismiss()" />
   </div>
 
-  <div class="p-6 relative">
+  <div class="px-6 pt-2 relative">
     <ng-content select="[content]"></ng-content>
   </div>
 
-  <div class="flex gap-4 justify-end p-6 border-t-2 border-primary-100">
+  <div class="flex gap-4 justify-center px-6 pb-6">
     <ng-container *ngIf="!customActionButtons">
-      <button mat-raised-button (click)="onDismiss()">
-        {{ customCancelBtnName ? (customCancelBtnName | translate) : ('BUTTON.CANCEL' | translate) }}
-      </button>
-      <button mat-raised-button color="primary" (click)="onConfirm()" [disabled]="confirmBtnDisabled">
-        <div *ngIf="!confirmBtnLoading; else spinner" class="h-full w-full">
-          {{ customConfirmBtnName ? (customConfirmBtnName | translate) : ('BUTTON.CONFIRM' | translate) }}
-        </div>
-      </button>
+      <nma-button
+        [text]="customConfirmBtnName ? customConfirmBtnName : 'BUTTON.CONFIRM'"
+        [loading]="confirmBtnLoading"
+        buttonType="confirm"
+        (clickEvent)="onConfirm()"
+        [disabled]="confirmBtnDisabled" />
+      <nma-button
+        [text]="customCancelBtnName ? customCancelBtnName : 'BUTTON.CANCEL'"
+        buttonType="cancel"
+        (clickEvent)="onDismiss()" />
     </ng-container>
 
     <ng-container *ngIf="customActionButtons">
