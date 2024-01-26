@@ -19,11 +19,13 @@ import { AuthForm } from './models/auth-form-group.interface';
 import { authLogin, authRegister, authChangePassword, authSwitchMode } from './store/auth.actions';
 import { selectAuthCallState, selectAuthMode } from './store/auth.selectors';
 import { createAuthFormGroupUtil } from './utils/create-auth-formgroup';
+import { ButtonComponent } from '../design-system/button/button.component';
 
 @Component({
   standalone: true,
   selector: 'nma-auth-component',
   templateUrl: './auth.component.html',
+  styleUrl: './auth.component.scss',
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -35,6 +37,7 @@ import { createAuthFormGroupUtil } from './utils/create-auth-formgroup';
     TextControlComponent,
     PasswordControlComponent,
     LanguageMenuComponent,
+    ButtonComponent,
   ],
   providers: [EncodePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,7 +69,7 @@ export class AuthComponent implements OnInit {
       .subscribe();
   }
 
-  protected get formValid() {
+  protected get formValid(): boolean {
     let formValid = false;
 
     this.authMode$

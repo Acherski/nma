@@ -1,22 +1,21 @@
 <button
   class="nma-button group"
-  [class.nma-button__primary]="buttonType === 'confirm'"
-  [class.nma-button__secondary]="buttonType !== 'confirm'"
+  [type]="buttonType"
+  [class.nma-button__primary]="buttonMode === 'confirm'"
+  [class.nma-button__secondary]="buttonMode !== 'confirm'"
   [class.nma-button__disabled]="disabled"
   (click)="onClick()">
   <div [class.invisible]="loading" class="flex">
-    <div *ngIf="buttonType === 'confirm'" class="nma-button__icon">
+    <div *ngIf="showIcon && buttonMode === 'confirm'" class="nma-button__icon">
       <mat-icon>done</mat-icon>
     </div>
-    <div *ngIf="buttonType === 'cancel'" class="nma-button__icon">
+    <div *ngIf="showIcon && buttonMode === 'cancel'" class="nma-button__icon">
       <mat-icon>close</mat-icon>
     </div>
-    <span class="nma-button__text" [ngStyle]="{'margin-left': buttonType === 'default' ? '1rem' : '0' }">
-      {{ text | translate }}
-    </span>
+    <span class="nma-button__text" [ngStyle]="{'margin-left': showIcon ? '0' : '1rem' }"> {{ text | translate }} </span>
   </div>
 
-  <div *ngIf="loading" class="absolute flex items-center justify-center scale-[20%]">
+  <div *ngIf="loading" class="nma-button__loader">
     <nma-spinner />
   </div>
 </button>

@@ -30,7 +30,7 @@
     "CHANGE_PASSWORD_SUCCESS": "Password changed successfully. You can now log in",
     "CHANGE_PASSWORD_ERROR": "Password change failed",
     "PASSWORD_CHANGE_NEEDED": "Password needs to be updated",
-    "PASSWORDS_DONT_MATCH": "Password do not match",
+    "PASSWORDS_DONT_MATCH": "Passwords do not match",
     "DISCONNECTED": "You have been disconnected from the server"
   },
   "USERS": {

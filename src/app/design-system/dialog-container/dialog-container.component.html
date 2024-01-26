@@ -5,7 +5,7 @@
     <nma-icon-button icon="close" (clickEvent)="onDismiss()" />
   </div>
 
-  <div class="px-6 pt-2 relative">
+  <div class="px-6 py-2 relative">
     <ng-content select="[content]"></ng-content>
   </div>
 
@@ -14,12 +14,15 @@
       <nma-button
         [text]="customConfirmBtnName ? customConfirmBtnName : 'BUTTON.CONFIRM'"
         [loading]="confirmBtnLoading"
-        buttonType="confirm"
+        buttonMode="confirm"
+        buttonType="submit"
+        [showIcon]="true"
         (clickEvent)="onConfirm()"
         [disabled]="confirmBtnDisabled" />
       <nma-button
         [text]="customCancelBtnName ? customCancelBtnName : 'BUTTON.CANCEL'"
-        buttonType="cancel"
+        buttonMode="cancel"
+        [showIcon]="true"
         (clickEvent)="onDismiss()" />
     </ng-container>
 

@@ -1,62 +1,64 @@
-<form
-  [formGroup]="formGroup"
-  class="w-[100vw] bg-center h-[100vh] dark:brightness-50 dark:bg-[url('/assets/images/bg-auth-dark.jpg')] bg-[url('/assets/images/bg-auth.jpg')] bg-no-repeat nma-auth-component bg-cover overflow-hidden flex flex-col gap-4 items-center justify-center">
-  <div class="text-center">
-    <h3>Numerius</h3>
-    <h1>{{ 'AUTH.MANAGEMENT_APP' | translate }}</h1>
+<div
+  class="w-[100vw] z-1 absolute bg-center dark:brightness-[0.3] h-[100vh] flex flex-col gap-4 items-center justify-center bg-[url('/assets/images/bg-auth.jpg')] bg-no-repeat nma-auth-component bg-cover overflow-hidden"></div>
+<div class="w-[100vw] h-[100vh] flex items-center justify-center z-5">
+  <form
+    [formGroup]="formGroup"
+    class="flex flex-col gap-4 items-center w-[25rem] justify-center bg-white p-12 border-rounded glass-effect">
+    <div class="text-center">
+      <h3>Numerius</h3>
+      <h1>{{ 'AUTH.MANAGEMENT_APP' | translate }}</h1>
+    </div>
+
+    <nma-text-control label="AUTH.LOGIN" [control]="formGroup.controls.login" />
+
+    <nma-text-control
+      *ngIf="(authMode$ | ngrxPush) === AuthModeEnum.REGISTER"
+      label="AUTH.EMAIL"
+      [control]="formGroup.controls.email" />
+
+    <ng-container *ngIf="(authMode$ | ngrxPush) === AuthModeEnum.PASSWORD_CHANGE">
+      <nma-password-control label="AUTH.NEW_PASSWORD" [control]="formGroup.controls.newPassword" />
+      <nma-password-control label="AUTH.NEW_PASSWORD_REENTERED" [control]="formGroup.controls.newPasswordReentered" />
+    </ng-container>
+
+    <nma-password-control
+      *ngIf="(authMode$ | ngrxPush) !== AuthModeEnum.PASSWORD_CHANGE"
+      label="AUTH.PASSWORD"
+      [control]="formGroup.controls.password" />
+
+    <div *ngrxLet="authMode$ as mode" class="flex flex-col gap-4 items-center">
+      <nma-button
+        *ngIf="mode === AuthModeEnum.LOGIN"
+        text="AUTH.LOG_IN"
+        buttonMode="confirm"
+        buttonType="submit"
+        (clickEvent)="login(formGroup.controls.login.value, formGroup.controls.password.value)"
+        [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING" />
+
+      <nma-button
+        *ngIf="mode === AuthModeEnum.REGISTER"
+        text="AUTH.REGISTER"
+        buttonMode="confirm"
+        buttonType="submit"
+        [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING"
+        (clickEvent)=" register(formGroup.controls.login.value, formGroup.controls.password.value, formGroup.controls.email.value)" />
+
+      <nma-button
+        *ngIf="mode === AuthModeEnum.PASSWORD_CHANGE"
+        text="AUTH.UPDATE_PASSWORD"
+        buttonMode="confirm"
+        buttonType="submit"
+        [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING"
+        (clickEvent)="changeYourOwnPassword(formGroup.controls.newPassword.value)" />
+
+      <nma-button
+        class="scale-75"
+        [text]="mode === AuthModeEnum.LOGIN ? 'AUTH.REGISTER_MODE' : 'AUTH.LOGIN_MODE'"
+        (clickEvent)="switchMode()" />
+    </div>
+  </form>
+
+  <div class="absolute right-4 top-4">
+    <nma-language-menu />
   </div>
-
-  <nma-text-control label="AUTH.LOGIN" [control]="formGroup.controls.login" />
-
-  <nma-text-control
-    *ngIf="(authMode$ | ngrxPush) === AuthModeEnum.REGISTER"
-    label="AUTH.EMAIL"
-    [control]="formGroup.controls.email" />
-
-  <ng-container *ngIf="(authMode$ | ngrxPush) === AuthModeEnum.PASSWORD_CHANGE">
-    <nma-password-control label="AUTH.NEW_PASSWORD" [control]="formGroup.controls.newPassword" />
-    <nma-password-control label="AUTH.NEW_PASSWORD_REENTERED" [control]="formGroup.controls.newPasswordReentered" />
-  </ng-container>
-
-  <nma-password-control
-    *ngIf="(authMode$ | ngrxPush) !== AuthModeEnum.PASSWORD_CHANGE"
-    label="AUTH.PASSWORD"
-    [control]="formGroup.controls.password" />
-
-  <div *ngrxLet="authMode$ as mode" class="flex flex-col gap-4">
-    <button
-      *ngIf="mode === AuthModeEnum.LOGIN"
-      [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING"
-      (click)="login(formGroup.controls.login.value, formGroup.controls.password.value)"
-      mat-raised-button
-      color="primary">
-      {{ 'AUTH.LOG_IN' | translate }}
-    </button>
-    <button
-      *ngIf="mode === AuthModeEnum.REGISTER"
-      [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING"
-      (click)="
-        register(formGroup.controls.login.value, formGroup.controls.password.value, formGroup.controls.email.value)
-      "
-      mat-raised-button
-      color="primary">
-      {{ 'AUTH.REGISTER' | translate }}
-    </button>
-    <button
-      *ngIf="mode === AuthModeEnum.PASSWORD_CHANGE"
-      [disabled]="!formValid || (callState$ | ngrxPush) === LoadingState.LOADING"
-      (click)="changeYourOwnPassword(formGroup.controls.newPassword.value)"
-      mat-raised-button
-      color="primary">
-      {{ 'AUTH.UPDATE_PASSWORD' | translate }}
-    </button>
-
-    <button type="button" (click)="switchMode()">
-      {{ mode === AuthModeEnum.LOGIN ? ('AUTH.REGISTER_MODE' | translate) : ('AUTH.LOGIN_MODE' | translate) }}
-    </button>
-  </div>
-</form>
-
-<div class="absolute right-4 top-4">
-  <nma-language-menu />
 </div>
