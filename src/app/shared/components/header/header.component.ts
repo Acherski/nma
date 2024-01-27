@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { LetDirective } from '@ngrx/component';
 import { CommonModule } from '@angular/common';
@@ -7,9 +6,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ChangeOwnPasswordDialogComponent } from './change-own-password-dialog/change-own-password-dialog.component';
 import { authChangePassword, authLogout } from 'src/app/auth/store/auth.actions';
 import { Store } from '@ngrx/store';
-import { MatMenuModule } from '@angular/material/menu';
 import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';
-import { MatIconModule } from '@angular/material/icon';
 import { DarkModeSwitchComponent } from './dark-mode-switch-component/dark-mode-switch.component';
 import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
 
@@ -19,13 +16,10 @@ import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
   templateUrl: 'header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatButtonModule,
     TranslateModule,
     LetDirective,
     CommonModule,
-    MatMenuModule,
     LanguageMenuComponent,
-    MatIconModule,
     DarkModeSwitchComponent,
     BurgerMenuComponent,
   ],

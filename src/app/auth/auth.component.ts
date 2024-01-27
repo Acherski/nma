@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { LetDirective, PushPipe } from '@ngrx/component';
 import { TranslateModule } from '@ngx-translate/core';
 import { EncodePipe } from 'src/app/shared/utils/pipes/encode.pipe';
@@ -30,7 +29,6 @@ import { ButtonComponent } from '../design-system/button/button.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    MatButtonModule,
     PushPipe,
     TranslateModule,
     LetDirective,

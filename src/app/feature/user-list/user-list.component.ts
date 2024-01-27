@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, ViewChild, inje
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { MatButtonModule } from '@angular/material/button';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { provideComponentStore } from '@ngrx/component-store';
 import { UserListComponentStore } from './user-list-component-store.store';
@@ -40,7 +39,6 @@ import { ButtonComponent } from 'src/app/design-system/button/button.component';
     CommonModule,
     HeaderComponent,
     TranslateModule,
-    MatButtonModule,
     DialogModule,
     LetDirective,
     SpinnerComponent,
