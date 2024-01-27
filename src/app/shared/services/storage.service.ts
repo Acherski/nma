@@ -15,6 +15,18 @@ export class StorageService {
     localStorage.removeItem('token');
   }
 
+  public setUserName(userName: string) {
+    localStorage.setItem('userName', userName);
+  }
+
+  public getUserName() {
+    return localStorage.getItem('userName');
+  }
+
+  public removeUserName() {
+    localStorage.removeItem('userName');
+  }
+
   // language
   public setLanguage(language: string) {
     localStorage.setItem('language', language);

@@ -1,0 +1,27 @@
+<div class="relative z-50">
+  <nma-icon-button icon="menu" (clickEvent)="menuOpen = !menuOpen" />
+
+  <div
+    *ngIf="menuOpen"
+    (appClickOutside)="menuOpen = false"
+    class="absolute rounded border-[1px] border-solid right-0 top-8 p-4 bg-white dark:bg-stone-800 flex flex-col shadow min-w-40">
+    <div class="flex justify-center gap-2 border-b-[1px] border-solid">
+      <div><mat-icon>person</mat-icon></div>
+      <span class="font-bold">{{ userName }}</span>
+    </div>
+
+    <div class="py-2 flex flex-col justify-center border-b-[1px] border-solid">
+      <button mat-raised-button (click)="onChangePassword()" class="hover:font-semibold">
+        {{ 'BUTTON.CHANGE_PASSWORD' | translate }}
+      </button>
+      <button mat-raised-button (click)="onLogOut()" class="hover:font-semibold">
+        {{ 'AUTH.LOG_OUT' | translate }}
+      </button>
+    </div>
+
+    <div class="flex justify-center items-center mt-2 relative left-2">
+      <nma-dark-mode-switch />
+      <nma-language-menu />
+    </div>
+  </div>
+</div>

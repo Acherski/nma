@@ -39,6 +39,7 @@ export class WebsocketService {
   public disconnect(): void {
     this.snackBarService.showInfoMessage('AUTH.DISCONNECTED');
     this.storageService.removeSessionToken();
+    this.storageService.removeUserName();
     this.router.navigate(['login']);
   }
 

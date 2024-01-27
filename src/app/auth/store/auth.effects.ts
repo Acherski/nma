@@ -62,6 +62,7 @@ export class AuthEffects {
                   } else if (loggedIn === 1) {
                     const sessionToken = loginResponse.split('|')[5];
                     this.storageService.setSessionToken(sessionToken);
+                    this.storageService.setUserName(login);
                     this.store.dispatch(authLoginSuccess());
                     this.snackBarService.showSuccessMessage('AUTH.LOGIN_SUCCESS');
                     this.router.navigate(['']);

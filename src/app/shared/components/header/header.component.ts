@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DarkModeSwitchComponent } from './dark-mode-switch-component/dark-mode-switch.component';
+import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
 
 @Component({
   selector: 'nma-header',
@@ -26,6 +27,7 @@ import { DarkModeSwitchComponent } from './dark-mode-switch-component/dark-mode-
     LanguageMenuComponent,
     MatIconModule,
     DarkModeSwitchComponent,
+    BurgerMenuComponent,
   ],
 })
 export class HeaderComponent {
