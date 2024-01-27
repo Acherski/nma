@@ -21,8 +21,4 @@ export class ButtonComponent {
   @Input() icon?: string;
 
   @Output() clickEvent = new EventEmitter();
-
-  onClick(): void {
-    this.clickEvent.emit();
-  }
 }

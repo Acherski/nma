@@ -42,7 +42,7 @@ export class DarkModeSwitchComponent implements OnInit {
       .subscribe();
   }
 
-  toggleDarkMode() {
+  toggleDarkMode(): void {
     this.darkModeControl.setValue(!this.darkModeControl.value);
   }
 }

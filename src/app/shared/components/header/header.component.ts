@@ -32,11 +32,11 @@ export class HeaderComponent {
     private dialog: Dialog
   ) {}
 
-  protected onLogOut() {
+  protected onLogOut(): void {
     this.store.dispatch(authLogout());
   }
 
-  protected onChangePassword() {
+  protected onChangePassword(): void {
     const dialogRef = this.dialog.open<{ oldPassword: string; newPassword: string }>(ChangeOwnPasswordDialogComponent, {
       width: '350px',
     });

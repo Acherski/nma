@@ -4,7 +4,7 @@
   [class.nma-button__primary]="buttonMode === 'confirm'"
   [class.nma-button__secondary]="buttonMode !== 'confirm'"
   [class.nma-button__disabled]="disabled"
-  (click)="onClick()">
+  (click)="clickEvent.emit()">
   <div [class.invisible]="loading" class="flex">
     <div *ngIf="icon" class="nma-button__icon">
       <mat-icon>{{ icon }}</mat-icon>

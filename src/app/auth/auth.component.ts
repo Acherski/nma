@@ -95,23 +95,23 @@ export class AuthComponent implements OnInit {
     return formValid;
   }
 
-  protected login(login: string, password: string) {
+  protected login(login: string, password: string): void {
     this.store.dispatch(authLogin({ login, password }));
   }
 
-  protected register(login: string, password: string, email: string) {
+  protected register(login: string, password: string, email: string): void {
     this.store.dispatch(authRegister({ login, password, email }));
   }
 
-  protected changeYourOwnPassword(newPassword: string) {
+  protected changeYourOwnPassword(newPassword: string): void {
     this.store.dispatch(authChangePassword({ newPassword }));
   }
 
-  protected switchMode() {
+  protected switchMode(): void {
     this.store.dispatch(authSwitchMode());
   }
 
-  private resetForm() {
+  private resetForm(): void {
     this.formGroup.reset();
     this.formGroup.controls.login.setErrors(null);
     this.formGroup.controls.password.setErrors(null);

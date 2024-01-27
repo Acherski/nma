@@ -4,7 +4,7 @@ import { NotTranslatedService } from './not-translated-service.service';
 
 @Injectable()
 export class MyMissingTranslationHandler implements MissingTranslationHandler {
-  handle(params: MissingTranslationHandlerParams) {
+  handle(params: MissingTranslationHandlerParams): string {
     this.nts.notTranslated(params.key);
     return '[MISSING]' + params.key;
   }

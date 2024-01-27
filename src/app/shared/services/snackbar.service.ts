@@ -27,7 +27,7 @@ export class SnackBarService {
     duration: this.defaultDuration,
   };
 
-  showSuccessMessage(message: string) {
+  showSuccessMessage(message: string): void {
     this.matsnack.open(
       this.translateService.instant(message),
       this.translateService.instant('BUTTON.CLOSE'),
@@ -35,7 +35,7 @@ export class SnackBarService {
     );
   }
 
-  showErrorMessage(message: string) {
+  showErrorMessage(message: string): void {
     this.matsnack.open(
       this.translateService.instant(message),
       this.translateService.instant('BUTTON.CLOSE'),
@@ -43,7 +43,7 @@ export class SnackBarService {
     );
   }
 
-  showInfoMessage(message: string) {
+  showInfoMessage(message: string): void {
     this.matsnack.open(
       this.translateService.instant(message),
       this.translateService.instant('BUTTON.CLOSE'),

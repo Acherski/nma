@@ -9,7 +9,7 @@ export class PaginatorService {
 
   constructor(private translateService: TranslateService) {}
 
-  public translatePaginator(paginator: MatPaginator) {
+  public translatePaginator(paginator: MatPaginator): MatPaginator {
     const matPaginator = paginator;
     matPaginator._intl.firstPageLabel = this.translateService.instant('TABLE.PAGINATOR.FIRST_PAGE');
     matPaginator._intl.itemsPerPageLabel = this.translateService.instant('TABLE.PAGINATOR.ITEMS_PER_PAGE');
@@ -21,7 +21,7 @@ export class PaginatorService {
     return matPaginator;
   }
 
-  public getRangeLabel = (page: number, pageSize: number, length: number) => {
+  public getRangeLabel = (page: number, pageSize: number, length: number): string => {
     const start = page * pageSize + 1;
     const end = (page + 1) * pageSize;
     return `${start} - ${end <= length ? end : length} ${this.translateService.instant(

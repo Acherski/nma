@@ -41,7 +41,7 @@ export class ChangeOwnPasswordDialogComponent {
     private store: Store
   ) {}
 
-  protected get passwordsDontMatch() {
+  protected get passwordsDontMatch(): boolean {
     return (
       this.formGroup.controls.newPassword.value !== this.formGroup.controls.reenterNewPassword.value &&
       this.formGroup.controls.newPassword.touched &&
@@ -49,14 +49,14 @@ export class ChangeOwnPasswordDialogComponent {
     );
   }
 
-  protected get formValid() {
+  protected get formValid(): boolean {
     return (
       this.formGroup.valid &&
       this.formGroup.controls.newPassword.value === this.formGroup.controls.reenterNewPassword.value
     );
   }
 
-  protected onConfirmClick() {
+  protected onConfirmClick(): void {
     this.dialogRef.close({
       oldPassword: this.formGroup.controls.oldPassword.value,
       newPassword: this.formGroup.controls.newPassword.value,

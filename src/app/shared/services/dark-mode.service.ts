@@ -9,7 +9,7 @@ export class DarkModeService {
     return this.darkMode.asObservable();
   }
 
-  setMode(value: boolean) {
+  setMode(value: boolean): void {
     this.darkMode.next(value);
   }
 }

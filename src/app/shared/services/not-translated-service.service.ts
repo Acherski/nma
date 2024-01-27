@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class NotTranslatedService {
-  notTranslated(key: string) {
+  notTranslated(key: string): string {
     return key;
   }
 }

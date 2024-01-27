@@ -87,7 +87,7 @@ export class UserListComponent implements OnInit {
     this.updatePaginatorTranslations();
   }
 
-  onUserDelete(user: User) {
+  onUserDelete(user: User): void {
     const dialogRef = this.dialog.open<User>(DeleteUserDialogComponent, {
       width: '350px',
       data: { userName: user.userName },
@@ -100,7 +100,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  openAttributeDialog(userName: string, attributeName?: string, attributeValue?: string) {
+  openAttributeDialog(userName: string, attributeName?: string, attributeValue?: string): void {
     const dialogRef = this.dialog.open<{ userName: string; attributeName: string; attributeValue: string }>(
       UserAttributeDialogComponent,
       {
@@ -120,7 +120,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  onAttributeDelete(userName: string, attribute: string) {
+  onAttributeDelete(userName: string, attribute: string): void {
     const dialogRef = this.dialog.open<{ userName: string; attribute: string }>(DeleteAttributeDialogComponent, {
       width: '350px',
       data: { userName, attribute },
@@ -133,7 +133,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  onPasswordChange(user: User) {
+  onPasswordChange(user: User): void {
     const dialogRef = this.dialog.open<ChangePasswordDialogData>(ChangePasswordDialogComponent, {
       width: '350px',
       data: { userName: user.userName },
@@ -149,7 +149,7 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  toggleAttributes(row: User) {
+  toggleAttributes(row: User): void {
     if (row === this.expandedElement) {
       this.expandedElement = null;
       return;
@@ -167,12 +167,12 @@ export class UserListComponent implements OnInit {
       .subscribe();
   }
 
-  onSort() {
+  onSort(): void {
     this.expandedElement = null;
     this.componentStore.loadUsers();
   }
 
-  private setPaginatorAndSort() {
+  private setPaginatorAndSort(): void {
     this.componentStore.listOfUsers$
       .pipe(
         tap(list => {
@@ -190,7 +190,7 @@ export class UserListComponent implements OnInit {
   }
 
   // TODO paginator doesn't react on language change w/o function below
-  private updatePaginatorTranslations() {
+  private updatePaginatorTranslations(): void {
     this.translateService.onLangChange.subscribe(() => {
       this.paginator.pageSizeOptions = this.pageSizeOptions;
 
