@@ -63,7 +63,7 @@ export class AuthComponent implements OnInit {
     this.authMode$
       .pipe(
         distinctUntilChanged(),
-        tap(() => this.formGroup.reset()),
+        tap(() => this.resetForm()),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe();
@@ -111,5 +111,14 @@ export class AuthComponent implements OnInit {
 
   protected switchMode() {
     this.store.dispatch(authSwitchMode());
+  }
+
+  private resetForm() {
+    this.formGroup.reset();
+    this.formGroup.controls.login.setErrors(null);
+    this.formGroup.controls.password.setErrors(null);
+    this.formGroup.controls.newPassword.setErrors(null);
+    this.formGroup.controls.newPasswordReentered.setErrors(null);
+    this.formGroup.controls.email.setErrors(null);
   }
 }

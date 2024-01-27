@@ -1,8 +1,8 @@
 <div class="flex items-center justify-center relative">
   <button
     (click)="onClick($event)"
-    class="material-icons"
     type="button"
+    class="flex items-center justify-center"
     [matTooltipDisabled]="!tooltipText.length"
     [matTooltip]="tooltipText | translate">
     <mat-icon [class]="iconStyles">{{ icon }}</mat-icon>

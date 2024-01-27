@@ -8,7 +8,7 @@
   <nma-header label="USERS.USERS_LIST" />
 
   <div class="nma-user-list px-8 py-6">
-    <div *ngIf="vm.callState === LoadingState.LOADING" class="w-full flex justify-center">
+    <div *ngIf="vm.callState === LoadingState.LOADING" class="w-full flex justify-center relative top-12">
       <nma-spinner />
     </div>
 
@@ -47,19 +47,18 @@
                     (mouseover)="hoveredAttributeId = index"
                     (focus)="hoveredAttributeId = index"
                     (mouseleave)="hoveredAttributeId = null"
-                    class="flex gap-1">
+                    class="flex gap-1 items-center">
                     <span> {{ attr.key }}: {{ attr.value }} </span>
-                    <div [class.hidden]="hoveredAttributeId !== index" class="flex gap-1">
-                      <button
-                        (click)="openAttributeDialog(user.userName, attr.key, attr.value)"
-                        class="hover:bg-gray-200 rounded flex h-5 w-5 border-[1px] justify-center items-center relative bottom-[1px]">
-                        <mat-icon class="text-xs relative top-1">edit</mat-icon>
-                      </button>
-                      <button
-                        (click)="onAttributeDelete(user.userName, attr.key)"
-                        class="hover:bg-gray-200 rounded flex h-5 w-5 border-[1px] justify-center items-center relative bottom-[1px]">
-                        <mat-icon class="text-xs relative top-1">delete</mat-icon>
-                      </button>
+                    <div [class.invisible]="hoveredAttributeId !== index" class="flex">
+                      <nma-icon-button
+                        (clickEvent)="openAttributeDialog(user.userName, attr.key, attr.value)"
+                        icon="edit"
+                        class="scale-50" />
+
+                      <nma-icon-button
+                        (clickEvent)="openAttributeDialog(user.userName, attr.key, attr.value)"
+                        icon="delete"
+                        class="scale-50" />
                     </div>
                   </div>
                 </div>
@@ -68,11 +67,11 @@
                     {{ 'USERS.NO_ATTRIBUTES_FOUND' | translate }}
                   </p>
                 </ng-template>
-                <button
+                <nma-button
                   *ngIf="expandedElement && user === expandedElement"
-                  (click)="openAttributeDialog(user.userName)">
-                  {{ 'USERS.ADD_ATTRIBUTE' | translate }}
-                </button>
+                  text="USERS.ADD_ATTRIBUTE"
+                  icon="add"
+                  (clickEvent)="openAttributeDialog(user.userName)" />
               </div>
             </div>
           </td>

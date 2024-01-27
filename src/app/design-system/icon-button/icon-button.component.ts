@@ -17,7 +17,7 @@ export class IconButtonComponent implements OnInit {
   @Input() customTailwindClasses?: string;
   @Output() clickEvent = new EventEmitter<void>();
 
-  iconStyles = 'hover:scale-125 dark:text-gray-200 text-primary-600';
+  iconStyles = 'hover:scale-125 dark:text-gray-200 text-primary-300';
 
   ngOnInit(): void {
     this.iconStyles = `${this.iconStyles} ${this.customTailwindClasses}`;

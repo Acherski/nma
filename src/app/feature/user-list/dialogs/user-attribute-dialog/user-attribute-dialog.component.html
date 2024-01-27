@@ -1,12 +1,16 @@
 <nma-dialog-container
   (confirmClick)="onConfirmClick()"
-  [titleHeader]="editionMode ? 'USERS.EDIT_ATTRIBUTE' : 'USERS.ADD_ATTRIBUTE'">
+  [titleHeader]="editionMode ? 'USERS.EDIT_ATTRIBUTE' : 'USERS.ADD_ATTRIBUTE'"
+  [confirmBtnDisabled]="formGroup.invalid">
   <form content [formGroup]="formGroup">
-    <p>
+    <p class="dark:text-white mb-4">
       {{ 'USERS.USER_NAME' | translate }}:
       <span class="font-semibold">{{ data.userName }}</span>
     </p>
-    <nma-text-control label="USERS.ATTRIBUTE_NAME" [control]="formGroup.controls.attributeName" />
+    <nma-text-control
+      [controlDisabled]="editionMode"
+      label="USERS.ATTRIBUTE_NAME"
+      [control]="formGroup.controls.attributeName" />
     <nma-text-control label="USERS.ATTRIBUTE_VALUE" [control]="formGroup.controls.attributeValue" />
   </form>
 </nma-dialog-container>

@@ -18,7 +18,7 @@ export class ButtonComponent {
   @Input() buttonType: 'submit' | 'button' = 'button';
   @Input() disabled = false;
   @Input() loading = false;
-  @Input() showIcon = false;
+  @Input() icon?: string;
 
   @Output() clickEvent = new EventEmitter();
 

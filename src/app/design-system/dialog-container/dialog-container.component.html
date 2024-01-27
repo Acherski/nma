@@ -12,17 +12,17 @@
   <div class="flex gap-4 justify-center px-6 pb-6">
     <ng-container *ngIf="!customActionButtons">
       <nma-button
-        [text]="customConfirmBtnName ? customConfirmBtnName : 'BUTTON.CONFIRM'"
-        [loading]="confirmBtnLoading"
         buttonMode="confirm"
         buttonType="submit"
-        [showIcon]="true"
+        icon="done"
         (clickEvent)="onConfirm()"
+        [text]="customConfirmBtnName ? customConfirmBtnName : 'BUTTON.CONFIRM'"
+        [loading]="confirmBtnLoading"
         [disabled]="confirmBtnDisabled" />
       <nma-button
-        [text]="customCancelBtnName ? customCancelBtnName : 'BUTTON.CANCEL'"
         buttonMode="cancel"
-        [showIcon]="true"
+        icon="close"
+        [text]="customCancelBtnName ? customCancelBtnName : 'BUTTON.CANCEL'"
         (clickEvent)="onDismiss()" />
     </ng-container>
 

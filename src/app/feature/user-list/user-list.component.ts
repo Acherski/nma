@@ -28,6 +28,7 @@ import { UserService } from 'src/app/backend/feature-services/user.service';
 import { DeleteAttributeDialogComponent } from './dialogs/delete-attribute-dialog/delete-attribute-dialog.component';
 import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/user-attribute-dialog.component';
 import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-button.component';
+import { ButtonComponent } from 'src/app/design-system/button/button.component';
 
 @Component({
   selector: 'nma-user-list',
@@ -51,6 +52,7 @@ import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-butt
     MatPaginatorModule,
     MatSortModule,
     IconButtonComponent,
+    ButtonComponent,
   ],
   providers: [provideComponentStore(UserListComponentStore), UserService],
   animations: [

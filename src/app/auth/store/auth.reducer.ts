@@ -3,6 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { AuthModeEnum } from '../enums/auth-mode.enum';
 import {
   authChangePassword,
+  authChangePasswordFail,
   authChangePasswordSuccess,
   authLogin,
   authLoginFail,
@@ -56,6 +57,10 @@ export const authReducer = createReducer(
     ...state,
     callState: LoadingState.LOADED,
     authMode: AuthModeEnum.LOGIN,
+  })),
+  on(authChangePasswordFail, state => ({
+    ...state,
+    callState: { error: 'error' },
   })),
   on(authSwitchModeToReg, state => ({
     ...state,
