@@ -8,10 +8,11 @@ import { ChangeOwnPasswordDialogComponent } from '../change-own-password-dialog/
 import { TranslateModule } from '@ngx-translate/core';
 import { DarkModeSwitchComponent } from '../dark-mode-switch-component/dark-mode-switch.component';
 import { LanguageMenuComponent } from 'src/app/shared/components/header/language-menu/language-menu.component';
-import { MatIconModule } from '@angular/material/icon';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { ClickOutsideDirective } from 'src/app/shared/utils/directives/click-outside.directive';
 import { MenuComponent } from 'src/app/design-system/menu/menu.component';
+import { SanitizeHtmlPipe } from 'src/app/shared/utils/pipes/sanitize-html.pipe';
+import { userIcon } from 'src/app/shared/constants/icons.constant';
 
 @Component({
   standalone: true,
@@ -24,13 +25,14 @@ import { MenuComponent } from 'src/app/design-system/menu/menu.component';
     DarkModeSwitchComponent,
     LanguageMenuComponent,
     TranslateModule,
-    MatIconModule,
     ClickOutsideDirective,
     MenuComponent,
+    SanitizeHtmlPipe,
   ],
 })
 export class BurgerMenuComponent implements OnInit {
   protected userName = '';
+  readonly userIcon = userIcon;
 
   constructor(
     private store: Store,

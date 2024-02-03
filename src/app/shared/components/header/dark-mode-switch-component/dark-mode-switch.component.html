@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center">
   <nma-icon-button
     [tooltipText]="darkModeControl.value ? 'HEADER.SWITCH_TO_LIGHT_MODE': 'HEADER.SWITCH_TO_DARK_MODE'"
-    [icon]="darkModeControl.value ? 'light_mode' : 'dark_mode'"
+    [icon]="darkModeControl.value ? lightModeIcon : darkModeIcon"
     (clickEvent)="toggleDarkMode()" />
 </div>

@@ -1,8 +1,10 @@
+import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { tap } from 'rxjs';
 import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-button.component';
+import { darkModeIcon, lightModeIcon } from 'src/app/shared/constants/icons.constant';
 import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
 
 @Component({
@@ -10,7 +12,7 @@ import { DarkModeService } from 'src/app/shared/services/dark-mode.service';
   selector: 'nma-dark-mode-switch',
   templateUrl: 'dark-mode-switch.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, IconButtonComponent],
+  imports: [NgIf, ReactiveFormsModule, IconButtonComponent],
 })
 export class DarkModeSwitchComponent implements OnInit {
   darkModeControl = new FormControl(false);
@@ -18,6 +20,9 @@ export class DarkModeSwitchComponent implements OnInit {
 
   private destroyRef = inject(DestroyRef);
   private darkModeService = inject(DarkModeService);
+
+  readonly lightModeIcon = lightModeIcon;
+  readonly darkModeIcon = darkModeIcon;
 
   ngOnInit(): void {
     const darkMode = localStorage.getItem('darkMode');

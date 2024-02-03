@@ -28,9 +28,9 @@
             <div class="flex gap-4 items-end justify-end">
               <nma-icon-button
                 tooltipText="BUTTON.CHANGE_PASSWORD"
-                icon="vpn_key"
+                [icon]="passwordIcon"
                 (clickEvent)="onPasswordChange(user)" />
-              <nma-icon-button tooltipText="BUTTON.DELETE" icon="delete" (clickEvent)="onUserDelete(user)" />
+              <nma-icon-button tooltipText="BUTTON.DELETE" [icon]="binIcon" (clickEvent)="onUserDelete(user)" />
             </div>
           </td>
         </ng-container>
@@ -52,12 +52,12 @@
                     <div [class.invisible]="hoveredAttributeId !== index" class="flex">
                       <nma-icon-button
                         (clickEvent)="openAttributeDialog(user.userName, attr.key, attr.value)"
-                        icon="edit"
+                        [icon]="editIcon"
                         class="scale-50" />
 
                       <nma-icon-button
-                        (clickEvent)="openAttributeDialog(user.userName, attr.key, attr.value)"
-                        icon="delete"
+                        (clickEvent)="onAttributeDelete(user.userName, attr.key)"
+                        [icon]="binIcon"
                         class="scale-50" />
                     </div>
                   </div>
@@ -70,7 +70,7 @@
                 <nma-button
                   *ngIf="expandedElement && user === expandedElement"
                   text="USERS.ADD_ATTRIBUTE"
-                  icon="add"
+                  [icon]="addIcon"
                   (clickEvent)="openAttributeDialog(user.userName)" />
               </div>
             </div>

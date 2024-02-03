@@ -1,15 +1,15 @@
 import { NgIf } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
+import { SanitizeHtmlPipe } from 'src/app/shared/utils/pipes/sanitize-html.pipe';
 
 @Component({
   standalone: true,
   changeDetection: ChangeDetectionStrategy.Default,
   selector: 'nma-icon-button',
   templateUrl: 'icon-button.component.html',
-  imports: [MatIconModule, TranslateModule, MatTooltipModule, NgIf],
+  imports: [TranslateModule, MatTooltipModule, NgIf, SanitizeHtmlPipe],
 })
 export class IconButtonComponent implements OnInit {
   @Input({ required: true }) icon = '';

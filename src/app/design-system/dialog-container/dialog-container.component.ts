@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { IconButtonComponent } from '../icon-button/icon-button.component';
 import { ButtonComponent } from '../button/button.component';
+import { cancelIcon, checkIcon } from 'src/app/shared/constants/icons.constant';
 
 @Component({
   standalone: true,
@@ -22,6 +23,9 @@ export class DialogContainerComponent {
   @Input() confirmBtnLoading = false;
 
   @Output() confirmClick = new EventEmitter<unknown>();
+
+  readonly cancelIcon = cancelIcon;
+  readonly checkIcon = checkIcon;
 
   constructor(public dialogRef: DialogRef<string>) {}
 

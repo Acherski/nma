@@ -7,6 +7,6 @@
     matTooltipClass="tooltip-style"
     matTooltipPosition="right"
     [routerLink]="link.url">
-    <mat-icon class="text-white">{{ link.icon }}</mat-icon>
+    <div class="text-white" [innerHTML]="link.icon | sanitizeHtml"></div>
   </div>
 </div>

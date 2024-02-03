@@ -2,7 +2,7 @@
   class="bg-white border-stone-500 dark:bg-stone-800 dark:border-stone-700 border-solid border-[1px] rounded-md flex flex-col">
   <div *ngIf="titleHeader" class="flex items-center justify-between pt-6 pb-4 px-6 border-primary-100 dark:text-white">
     <p class="!m-0 text-lg font-semibold">{{ titleHeader | translate }}</p>
-    <nma-icon-button icon="close" (clickEvent)="onDismiss()" />
+    <nma-icon-button [icon]="cancelIcon" (clickEvent)="onDismiss()" />
   </div>
 
   <div class="px-6 py-2 relative">
@@ -14,14 +14,14 @@
       <nma-button
         buttonMode="confirm"
         buttonType="submit"
-        icon="done"
+        [icon]="checkIcon"
         (clickEvent)="onConfirm()"
         [text]="customConfirmBtnName ? customConfirmBtnName : 'BUTTON.CONFIRM'"
         [loading]="confirmBtnLoading"
         [disabled]="confirmBtnDisabled" />
       <nma-button
         buttonMode="cancel"
-        icon="close"
+        [icon]="cancelIcon"
         [text]="customCancelBtnName ? customCancelBtnName : 'BUTTON.CANCEL'"
         (clickEvent)="onDismiss()" />
     </ng-container>

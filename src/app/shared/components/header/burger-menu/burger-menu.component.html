@@ -1,6 +1,6 @@
 <nma-menu>
-  <div class="flex justify-center gap-2 border-b-[1px] border-solid">
-    <div><mat-icon>person</mat-icon></div>
+  <div class="flex justify-center pb-2 gap-2 border-b-[1px] border-solid">
+    <div class="text-primary-400" [innerHTML]="userIcon | sanitizeHtml"></div>
     <span class="font-bold">{{ userName }}</span>
   </div>
 

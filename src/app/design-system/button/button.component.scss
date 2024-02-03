@@ -18,7 +18,7 @@
   }
 
   &__text {
-    @apply my-[0.45rem] mr-4 bg-transparent group-hover:text-white text-sm font-light;
+    @apply my-[0.45rem] mr-4 bg-transparent group-hover:text-white text-sm font-light tracking-widest;
   }
 
   &__loader {

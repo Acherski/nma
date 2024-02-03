@@ -6,9 +6,7 @@
   [class.nma-button__disabled]="disabled"
   (click)="clickEvent.emit()">
   <div [class.invisible]="loading" class="flex">
-    <div *ngIf="icon" class="nma-button__icon">
-      <mat-icon>{{ icon }}</mat-icon>
-    </div>
+    <div *ngIf="icon" class="nma-button__icon" [innerHTML]="icon | sanitizeHtml"></div>
     <span class="nma-button__text" [ngStyle]="{'margin-left': icon ? '0' : '1rem' }"> {{ text | translate }} </span>
   </div>
   <div *ngIf="loading" class="nma-button__loader">

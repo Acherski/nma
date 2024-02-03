@@ -5,6 +5,6 @@
     class="flex items-center justify-center"
     [matTooltipDisabled]="!tooltipText.length"
     [matTooltip]="tooltipText | translate">
-    <mat-icon [class]="iconStyles">{{ icon }}</mat-icon>
+    <div [class]="iconStyles" [innerHtml]="icon | sanitizeHtml"></div>
   </button>
 </div>

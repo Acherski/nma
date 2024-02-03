@@ -1,5 +1,5 @@
 <div class="relative z-50">
-  <nma-icon-button *ngIf="!textLabel" [icon]="icon ?? 'menu'" (clickEvent)="menuOpen = !menuOpen" />
+  <nma-icon-button *ngIf="!textLabel" (clickEvent)="menuOpen = !menuOpen" [icon]="icon ?? menuIcon"></nma-icon-button>
   <button *ngIf="textLabel" class="font-semibold hover:cursor-pointer" (click)="toggleMenu($event)">
     {{ textLabel }}
   </button>

@@ -12,7 +12,6 @@ import { DeleteUserDialogComponent } from './dialogs/delete-user-dialog/delete-u
 import { ChangePasswordDialogComponent } from './dialogs/change-password-dialog/change-password-dialog.component';
 import { ChangePasswordDialogData } from '../../feature/user-list/models/password-dialog-data.interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { filter, take, tap } from 'rxjs';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -27,6 +26,7 @@ import { DeleteAttributeDialogComponent } from './dialogs/delete-attribute-dialo
 import { UserAttributeDialogComponent } from './dialogs/user-attribute-dialog/user-attribute-dialog.component';
 import { IconButtonComponent } from 'src/app/design-system/icon-button/icon-button.component';
 import { ButtonComponent } from 'src/app/design-system/button/button.component';
+import { addIcon, binIcon, editIcon, passwordIcon } from 'src/app/shared/constants/icons.constant';
 
 @Component({
   selector: 'nma-user-list',
@@ -43,7 +43,6 @@ import { ButtonComponent } from 'src/app/design-system/button/button.component';
     SpinnerComponent,
     SideNavComponent,
     MatTableModule,
-    MatIconModule,
     CdkAccordionModule,
     MatPaginatorModule,
     MatSortModule,
@@ -77,6 +76,10 @@ export class UserListComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   readonly LoadingState = LoadingState;
+  readonly passwordIcon = passwordIcon;
+  readonly binIcon = binIcon;
+  readonly editIcon = editIcon;
+  readonly addIcon = addIcon;
 
   ngOnInit(): void {
     this.setPaginatorAndSort();
