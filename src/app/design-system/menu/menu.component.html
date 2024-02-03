@@ -1,0 +1,12 @@
+<div class="relative z-50">
+  <nma-icon-button *ngIf="!textLabel" [icon]="icon ?? 'menu'" (clickEvent)="menuOpen = !menuOpen" />
+  <button *ngIf="textLabel" class="font-semibold hover:cursor-pointer" (click)="toggleMenu($event)">
+    {{ textLabel }}
+  </button>
+  <div
+    *ngIf="menuOpen"
+    (appClickOutside)="menuOpen = false"
+    class="absolute rounded border-[1px] border-solid right-0 top-8 p-4 bg-white dark:bg-stone-800 flex flex-col shadow min-w-40">
+    <ng-content></ng-content>
+  </div>
+</div>

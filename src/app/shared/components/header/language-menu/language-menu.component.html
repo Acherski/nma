@@ -1,0 +1,5 @@
+<nma-menu #menu [textLabel]="currentLanguage | uppercase">
+  <button *ngFor="let language of languages" mat-menu-item (click)="setLanguage(language)">
+    {{ language.label | translate }}
+  </button>
+</nma-menu>

@@ -13,7 +13,6 @@ import { ChangePasswordDialogComponent } from './dialogs/change-password-dialog/
 import { ChangePasswordDialogData } from '../../feature/user-list/models/password-dialog-data.interface';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { filter, take, tap } from 'rxjs';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
@@ -45,7 +44,6 @@ import { ButtonComponent } from 'src/app/design-system/button/button.component';
     SideNavComponent,
     MatTableModule,
     MatIconModule,
-    MatTooltipModule,
     CdkAccordionModule,
     MatPaginatorModule,
     MatSortModule,

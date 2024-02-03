@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { languages } from './languages.const';
 import { LanguageItem } from './language-item.interface';
 import { StorageService } from 'src/app/shared/services/storage.service';
+import { MenuComponent } from 'src/app/design-system/menu/menu.component';
 
 @Component({
   standalone: true,
   selector: 'nma-language-menu',
   templateUrl: './language-menu.component.html',
-  imports: [CommonModule, MatButtonModule, MatMenuModule, TranslateModule],
+  imports: [CommonModule, MatButtonModule, TranslateModule, MenuComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LanguageMenuComponent {
+  @ViewChild('menu') menuComponent: MenuComponent | undefined;
+
   protected languages = languages;
 
   constructor(
@@ -29,5 +31,8 @@ export class LanguageMenuComponent {
   protected setLanguage(value: LanguageItem): void {
     this.storageService.setLanguage(value.shortName);
     this.translateService.use(value.shortName);
+    if (this.menuComponent) {
+      this.menuComponent.closeMenu();
+    }
   }
 }

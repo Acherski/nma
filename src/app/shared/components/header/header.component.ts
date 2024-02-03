@@ -6,7 +6,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { ChangeOwnPasswordDialogComponent } from './change-own-password-dialog/change-own-password-dialog.component';
 import { authChangePassword, authLogout } from 'src/app/auth/store/auth.actions';
 import { Store } from '@ngrx/store';
-import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';
+import { LanguageMenuComponent } from 'src/app/shared/components/header/language-menu/language-menu.component';
 import { DarkModeSwitchComponent } from './dark-mode-switch-component/dark-mode-switch.component';
 import { BurgerMenuComponent } from './burger-menu/burger-menu.component';
 

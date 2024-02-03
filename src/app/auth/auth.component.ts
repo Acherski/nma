@@ -12,7 +12,7 @@ import { LoadingState } from 'src/app/shared/constants/callstate.constant';
 import { Store } from '@ngrx/store';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { Router } from '@angular/router';
-import { LanguageMenuComponent } from 'src/app/design-system/language-menu/language-menu.component';
+import { LanguageMenuComponent } from 'src/app/shared/components/header/language-menu/language-menu.component';
 import { AuthModeEnum } from './enums/auth-mode.enum';
 import { AuthForm } from './models/auth-form-group.interface';
 import { authLogin, authRegister, authChangePassword, authSwitchMode } from './store/auth.actions';
