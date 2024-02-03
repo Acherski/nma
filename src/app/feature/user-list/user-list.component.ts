@@ -69,16 +69,14 @@ export class UserListComponent implements OnInit {
   protected listOfUsers: User[] = [];
   protected dataSource!: MatTableDataSource<User>;
   protected pageSizeOptions = [5, 10, 30, 100];
+  protected componentStore = inject(UserListComponentStore);
+
+  private paginatorService = inject(PaginatorService);
+  private translateService = inject(TranslateService);
+  private dialog = inject(Dialog);
   private destroyRef = inject(DestroyRef);
 
   readonly LoadingState = LoadingState;
-
-  constructor(
-    protected componentStore: UserListComponentStore,
-    private paginatorService: PaginatorService,
-    private translateService: TranslateService,
-    private dialog: Dialog
-  ) {}
 
   ngOnInit(): void {
     this.setPaginatorAndSort();
@@ -187,7 +185,7 @@ export class UserListComponent implements OnInit {
       .subscribe();
   }
 
-  // TODO paginator doesn't react on language change w/o function below
+  // TODO paginator doesn't react to language change without function below
   private updatePaginatorTranslations(): void {
     this.translateService.onLangChange.subscribe(() => {
       this.paginator.pageSizeOptions = this.pageSizeOptions;
